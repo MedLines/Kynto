@@ -8,12 +8,12 @@ export default function Hero() {
     <section className="relative w-full min-h-[900px] flex items-center pt-20 overflow-hidden bg-transparent font-poppins ">
       <HeroBackground />
 
-      <div className="container relative z-10 mx-auto px-6 grid lg:grid-cols-2 gap-12">
+      <div className="container relative z-10 mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div className="flex flex-col gap-8 max-w-2xl text-kynto-white justify-center h-full">
           <div className="flex items-center gap-2 text-kynto-white/90 font-medium">
             <Globe className="w-5 h-5" />
-            <span>Global Teams</span>
+            <span className="leading-none">Global Teams</span>
           </div>
 
           <h1 className="text-7xl md:text-8xl font-medium tracking-tight leading-[0.95]">
