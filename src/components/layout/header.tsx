@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -25,14 +26,18 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link
-          href="/"
-          className={cn(
-            "text-3xl font-bold tracking-tighter italic transition-colors",
-            isScrolled ? "text-kynto-black" : "text-white",
-          )}
-        >
-          Kynto
+        <Link href="/" className="transition-opacity hover:opacity-80">
+          <Image
+            src="/logo.svg"
+            alt="Kynto"
+            width={89}
+            height={32}
+            className={cn(
+              "transition-all duration-300",
+              isScrolled && "invert",
+            )}
+            priority
+          />
         </Link>
 
         {/* Menu Button */}

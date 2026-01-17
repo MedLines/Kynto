@@ -8,6 +8,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-poppins: var(--font-poppins);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -58,13 +59,13 @@
   --color-kynto-gray-80: var(--kynto-gray-80);
 
   /* Brand Colors */
-  --color-kynto-blue-primary: var(--kynto-blue-primary);
-  --color-kynto-orange-light: var(--kynto-orange-light);
-  --color-kynto-orange-border: var(--kynto-orange-border);
-  --color-kynto-green-secondary: var(--kynto-green-secondary);
+  --color-blue-primary: var(--kynto-blue-primary);
+  --color-orange-primary: var(--kynto-orange-light);
+  --color-orange-border: var(--kynto-orange-border);
+  --color-green-secondary: var(--kynto-green-secondary);
 
-  --color-hero-green-primary: var(--hero-green-primary);
-  --color-hero-green-border: var(--hero-green-border);
+  --color-green-primary: var(--hero-green-primary);
+  --color-green-border: var(--hero-green-border);
   --color-card-black: var(--card-black);
 }
 

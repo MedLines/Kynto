@@ -1,8 +1,8 @@
 export function HeroBackground() {
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-white">
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-kynto-white">
       {/* Studio Light Effect: Bright Cyan/Blue Top -> Deep Blue -> White Bottom */}
-      <div className="absolute inset-0 bg-[radial-gradient(100%_90%_at_50%_0%,#3CB9FF_0%,#0055FF_60%,#FFFFFF_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(100%_90%_at_50%_0%,#3CB9FF_0%,#019EFF_60%,#FFFFFF_100%)]" />
 
       {/* Grid Pattern */}
       <div
