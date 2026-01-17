@@ -5,7 +5,7 @@ import { HeroCard } from "./hero-card";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-[900px] flex items-center pt-20 overflow-hidden bg-transparent font-poppins">
+    <section className="relative w-full min-h-[900px] flex items-center pt-20 overflow-hidden bg-transparent font-poppins ">
       <HeroBackground />
 
       <div className="container relative z-10 mx-auto px-6 grid lg:grid-cols-2 gap-12">
@@ -58,7 +58,7 @@ export default function Hero() {
               variant="ghost"
               className="rounded-full px-8 h-16 text-lg text-kynto-black border border-blue-primary bg-white hover:bg-white "
             >
-              How it Works.
+              How it Works
             </NativeButton>
           </div>
         </div>
