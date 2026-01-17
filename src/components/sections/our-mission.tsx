@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
+import { MissionBadges } from "./mission-badges";
 
 export default function OurMission() {
   return (
@@ -25,9 +26,9 @@ export default function OurMission() {
             <div className="relative z-10 pt-8 pl-4 lg:pt-16 lg:pl-12">
               <Badge
                 variant="secondary"
-                className="px-4 py-2 bg-[#F5F5F7] hover:bg-[#F5F5F7]/90 text-black shadow-sm gap-2.5 text-sm font-medium tracking-wide rounded-full pointer-events-none"
+                className="px-4 py-2 bg-kynto-gray-100 hover:bg-kynto-gray-100/90 text-kynto-black shadow-sm gap-2.5 text-sm font-medium tracking-wide rounded-full pointer-events-none"
               >
-                <span className="w-1.5 h-1.5 bg-black rounded-full mr-2" />
+                <span className="w-1.5 h-1.5 bg-kynto-black rounded-full mr-1" />
                 Our Mission
               </Badge>
             </div>
@@ -44,7 +45,7 @@ export default function OurMission() {
                 />
               </div>
               <Separator orientation="vertical" className="h-8 bg-card-black" />
-              <p className="text-sm font-medium max-w-[180px] leading-snug text-gray-800">
+              <p className="text-sm font-medium max-w-[180px] leading-snug text-kynto-gray-80">
                 Making global employment borderless.
               </p>
             </div>
@@ -52,16 +53,19 @@ export default function OurMission() {
 
           {/* Right Column: Text Content */}
           <div className="relative z-10 lg:pl-10">
-            <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-medium tracking-tight text-black mb-8 leading-[1.1]">
+            <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-medium tracking-tight text-kynto-black mb-8 leading-[1.1]">
               We believe talent is distributed equally, but opportunity is not.
             </h2>
-            <p className="text-lg md:text-xl text-[#949494] leading-relaxed max-w-lg font-normal">
+            <p className="text-lg md:text-xl text-kynto-gray-400 leading-relaxed max-w-lg font-normal">
               We bridge that gap by handling the complex legal, tax, and payroll
               infrastructure so you can build a world-class team, regardless of
               geography.
             </p>
           </div>
         </div>
+
+        {/* Feature Badges Row */}
+        <MissionBadges />
       </div>
     </section>
   );
