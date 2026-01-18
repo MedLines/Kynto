@@ -1,7 +1,9 @@
 import DarkDashboard from "@/components/sections/dark-dashboard";
 import FinalCTA from "@/components/sections/final-cta";
+import Guarantee from "@/components/sections/guarantee";
 import Hero from "@/components/sections/hero";
 import Integrations from "@/components/sections/integrations";
+
 import Investors from "@/components/sections/investors";
 import LogoMarquee from "@/components/sections/logo-marquee";
 import OurMission from "@/components/sections/our-mission";
@@ -19,6 +21,7 @@ export default function Home() {
       <OurMission />
       <DarkDashboard />
       <Integrations />
+      <Guarantee />
       <LogoMarquee />
       <Solutions />
       <WorldMap />

@@ -107,7 +107,7 @@ export default function OurMission() {
                 />
               </div>
               <Separator orientation="vertical" className="h-8 bg-card-black" />
-              <p className="text-sm md:text-base font-medium max-w-[180px] leading-snug text-kynto-gray-80">
+              <p className="text-sm md:text-base font-medium max-w-[280px] leading-snug text-kynto-gray-80">
                 Making global employment borderless.
               </p>
             </div>
