@@ -1,15 +1,81 @@
-import { Badge } from "@/components/ui/badge";
+"use client";
+
+import { NativeBadge } from "@/components/ui/native-badge";
 import { Separator } from "@/components/ui/separator";
+import { motion } from "motion/react";
 import Image from "next/image";
 import { MissionBadges } from "./mission-badges";
+
+const EASING = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: EASING as any,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: -50, filter: "blur(10px)" }, // Comes from left (slide rightwards)
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.8,
+      ease: EASING as any,
+    },
+  },
+};
+
+const slideLeft = {
+  hidden: { opacity: 0, x: 50, filter: "blur(10px)" }, // Comes from right (slide leftwards)
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.8,
+      ease: EASING as any,
+    },
+  },
+};
+
+const slideUp = {
+  hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.8,
+      ease: EASING as any,
+    },
+  },
+};
 
 export default function OurMission() {
   return (
     <section className="relative w-full py-16 md:py-24 font-poppins overflow-hidden ">
-      <div className="container px-4 md:px-6 mx-auto border-t border-border/50">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left Column: Graphics and Mission */}
-          <div className="relative min-h-[400px] md:min-h-[500px] flex flex-col justify-between">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="kynto-container border-t border-border/50"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Left Column: Graphics and Mission - Comes from Left */}
+          <motion.div
+            variants={slideRight}
+            className="relative min-h-[280px] md:min-h-[500px] flex flex-col justify-between"
+          >
             {/* Background Sphere */}
             <div className="absolute top-1/2 left-0 -translate-y-1/4 w-[140%] -ml-[20%] lg:w-full lg:ml-0 lg:left-[-10%] opacity-80 pointer-events-none -z-10">
               <Image
@@ -23,18 +89,14 @@ export default function OurMission() {
             </div>
 
             {/* "Our Mission" Pill */}
-            <div className="relative z-10 pt-8 pl-4 lg:pt-16 lg:pl-12">
-              <Badge
-                variant="secondary"
-                className="px-4 py-2 bg-kynto-gray-100 hover:bg-kynto-gray-100/90 text-kynto-black shadow-sm gap-2.5 text-sm font-medium tracking-wide rounded-full pointer-events-none"
-              >
-                <span className="w-1.5 h-1.5 bg-kynto-black rounded-full mr-1" />
+            <div className="relative z-10 pt-8 lg:pt-16">
+              <NativeBadge className="pointer-events-none">
                 Our Mission
-              </Badge>
+              </NativeBadge>
             </div>
 
             {/* Bottom Graphic: Icon + Text */}
-            <div className="relative z-10 mt-auto pb-8 pl-4 lg:pb-16 lg:pl-12 flex items-center gap-4 ">
+            <div className="relative z-10 mt-auto pb-8 lg:pb-16 flex items-center gap-4 ">
               <div className="shrink-0 mt-1">
                 <Image
                   src="/elements/global.svg"
@@ -45,15 +107,15 @@ export default function OurMission() {
                 />
               </div>
               <Separator orientation="vertical" className="h-8 bg-card-black" />
-              <p className="text-sm font-medium max-w-[180px] leading-snug text-kynto-gray-80">
+              <p className="text-sm md:text-base font-medium max-w-[180px] leading-snug text-kynto-gray-80">
                 Making global employment borderless.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Text Content */}
-          <div className="relative z-10 lg:pl-10">
-            <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-medium tracking-tight text-kynto-black mb-8 leading-[1.1]">
+          {/* Right Column: Text Content - Comes from Right */}
+          <motion.div variants={slideLeft} className="relative z-10 lg:pl-0">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-medium tracking-tight text-kynto-black mb-6 md:mb-8 leading-[1.1]">
               We believe talent is distributed equally, but opportunity is not.
             </h2>
             <p className="text-lg md:text-xl text-kynto-gray-400 leading-relaxed max-w-lg font-normal">
@@ -61,12 +123,12 @@ export default function OurMission() {
               infrastructure so you can build a world-class team, regardless of
               geography.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Feature Badges Row */}
         <MissionBadges />
-      </div>
+      </motion.div>
     </section>
   );
 }

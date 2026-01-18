@@ -29,7 +29,7 @@ const PROFILES = [
     role: "Senior UX Researcher",
     location: "London, UK",
     image: "/people/jake-nackos.jpg",
-    tags: ["User Testing", "Data Analysis", "Research"],
+    tags: ["Testing", "Data Analysis", "UX"],
     bgColor: "bg-[#F3F4F6]",
   },
 ];

@@ -14,10 +14,34 @@ export function MissionBadges() {
   ];
 
   return (
-    <div className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 w-full px-2">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: 0.15,
+          },
+        },
+      }}
+      className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 w-full px-2"
+    >
       {badges.map(([line1, line2], index) => (
-        <div
+        <motion.div
           key={index}
+          variants={{
+            hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+            visible: {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: {
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
           className="relative group h-full w-full"
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -59,7 +83,7 @@ export function MissionBadges() {
             />
 
             {/* Hover Spotlight/Glow Effect inside the card */}
-            <motion.div className="absolute inset-0 bg-gradient-to-tr from-blue-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <motion.div className="absolute inset-0 bg-gradient-to-tr from-blue-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
             {/* Text Content */}
             <span className="relative z-10 text-xl md:text-2xl font-bold text-white block leading-none mb-1 drop-shadow-sm">
@@ -69,8 +93,8 @@ export function MissionBadges() {
               {line2}
             </span>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

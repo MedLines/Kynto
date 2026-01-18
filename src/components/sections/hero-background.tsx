@@ -15,7 +15,7 @@ export function HeroBackground() {
       />
 
       {/* 2. Studio Light Effect: Bright Cyan/Blue Top -> Deep Blue -> Transparent Bottom */}
-      <div className="absolute inset-0 bg-[radial-gradient(100%_90%_at_50%_0%,#3CB9FF_0%,#019EFF_50%,transparent_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(100%_90%_at_30%_0%,#3CB9FF_0%,#019EFF_50%,transparent_100%)]" />
 
       {/* 3. Top Grid Overlay (White -> Blue Transition) */}
 

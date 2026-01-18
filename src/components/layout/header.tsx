@@ -5,16 +5,34 @@ import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+
+      // Handle transparent/glassmorphism background
+      setIsScrolled(currentScrollY > 10);
+
+      // Handle visibility
+      // Hide when scrolling down and past the threshold
+      if (currentScrollY > lastScrollY.current && currentScrollY > 10) {
+        setIsVisible(false);
+      }
+      // Show when scrolling up or at the very top
+      else if (currentScrollY < lastScrollY.current || currentScrollY <= 10) {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -23,9 +41,10 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
         isScrolled ? "bg-white/80 backdrop-blur-md py-4 shadow-sm" : "py-6",
+        !isVisible && "-translate-y-full",
       )}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
+      <div className="kynto-container flex items-center justify-between">
         <Link href="/" className="transition-opacity hover:opacity-80">
           <Image
             src="/logo.svg"
