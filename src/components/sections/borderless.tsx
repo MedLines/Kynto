@@ -1,6 +1,7 @@
 "use client";
 
 import { BorderBeam } from "@/components/ui/border-beam";
+import MouseTiltCard from "@/components/ui/mouse-tilt-card";
 import { NativeBadge } from "@/components/ui/native-badge";
 import { NativeButton } from "@/components/ui/native-button";
 import { AnimatePresence, motion } from "motion/react";
@@ -13,28 +14,28 @@ const profiles = [
     first_name: "Sofia",
     role: "Product Designer",
     location: "Buenos Aires, Argentina",
-    image: "/elements/female-avatar.svg",
+    image: "/people/sofia-rodriguez.jpg",
   },
   {
     name: "James Chen",
     first_name: "James",
     role: "Senior Frontend Dev",
     location: "Singapore",
-    image: "/elements/female-avatar.svg", // Placeholder
+    image: "/people/james-chen.jpg", // Placeholder
   },
   {
     name: "Sarah Miller",
     first_name: "Sarah",
     role: "Product Manager",
     location: "London, UK",
-    image: "/elements/female-avatar.svg", // Placeholder
+    image: "/people/sarah-miller.jpg", // Placeholder
   },
   {
     name: "David Kim",
     first_name: "David",
     role: "Full Stack Engineer",
     location: "Seoul, South Korea",
-    image: "/elements/female-avatar.svg", // Placeholder
+    image: "/people/david-kim.jpg", // Placeholder
   },
 ];
 
@@ -65,73 +66,181 @@ export default function Borderless() {
         </h2>
 
         {/* Profile Card  */}
-        <div className="relative mt-12 w-[320px] min-h-[550px] bg-card-black/50 backdrop-blur-xl border border-orange-primary/10 rounded-4xl overflow-hidden flex flex-col items-center shadow-2xl group transition-all duration-500 hover:border-orange-primary/30">
-          <BorderBeam
-            lightColor="var(--color-orange-primary)"
-            lightWidth={900}
-            duration={5}
-          />
+        <MouseTiltCard
+          className="mt-12 rounded-4xl"
+          tiltIntensity={5}
+          glareIntensity={0.2}
+          scale={1.02}
+        >
+          <div className="relative w-[320px] min-h-[550px] bg-card-black/50 backdrop-blur-xl border border-orange-primary/10 rounded-4xl overflow-hidden flex flex-col items-center shadow-2xl group transition-all duration-500 hover:border-orange-primary/30">
+            <BorderBeam
+              lightColor="var(--color-orange-primary)"
+              lightWidth={900}
+              duration={5}
+            />
 
-          {/* Top Decorative Section */}
-          <div className="absolute top-0 w-full h-[180px]">
-            {/* Vertical Split Line */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-[70px] bg-white/10" />
+            {/* Top Decorative Section */}
+            <div className="absolute top-0 w-full h-[180px]">
+              {/* Vertical Split Line */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-[70px] bg-white/10" />
 
-            {/* The Arc */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[220px] h-[110px] rounded-t-full border-t border-l border-r border-white/10 bg-transparent" />
+              {/* The Arc */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[220px] h-[110px] rounded-t-full border-t border-l border-r border-white/10 bg-transparent" />
 
-            {/* Horizontal Line at Arc Base */}
-            <div className="absolute bottom-0 w-full h-px bg-white/10" />
-          </div>
+              {/* Horizontal Line at Arc Base */}
+              <div className="absolute bottom-0 w-full h-px bg-white/10" />
+            </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={profiles[currentIndex].name}
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="relative z-10 w-full flex flex-col items-center"
-            >
-              {/* Avatar - Centered on the Arc Line */}
-              <div className="relative mt-[100px] z-10">
-                <div className="w-[180px] h-[180px] rounded-full bg-zinc-800 overflow-hidden relative border-4 border-[#1A1A1A] shadow-xl">
-                  <Image
-                    src={profiles[currentIndex].image}
-                    alt={profiles[currentIndex].name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-
-              {/* Text Info */}
-              <div className="relative z-10 mt-6 flex flex-col items-center text-center">
-                <p className="text-white text-sm font-medium mb-4">
-                  {profiles[currentIndex].location}
-                </p>
-                <h3 className="text-white text-[28px] font-medium leading-tight tracking-tight">
-                  {profiles[currentIndex].name}
-                </h3>
-                <p className="text-white/80 text-[22px] font-normal leading-tight">
-                  {profiles[currentIndex].role}
-                </p>
-              </div>
-
-              {/* Action Area */}
-              <div className="relative z-10 mt-10 mb-10 flex items-center justify-center gap-6 w-full px-6">
-                <div className="h-px w-12 bg-orange-primary rounded-full" />
-                <NativeButton
-                  className="bg-white text-orange-primary hover:bg-zinc-100 rounded-full h-[52px] px-8 text-sm font-medium shadow-lg hover:shadow-orange-primary/20"
-                  glow={false}
+            <AnimatePresence mode="popLayout">
+              <motion.div
+                key={profiles[currentIndex].name}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.1,
+                      delayChildren: 0.05,
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    transition: {
+                      staggerChildren: 0.05,
+                      staggerDirection: -1,
+                    },
+                  },
+                }}
+                className="relative z-10 w-full flex flex-col items-center"
+              >
+                {/* Avatar - Centered on the Arc Line */}
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      filter: "blur(0px)",
+                      transition: { duration: 0.5, ease: "easeOut" },
+                    },
+                    exit: {
+                      opacity: 0,
+                      y: -20,
+                      filter: "blur(10px)",
+                      transition: { duration: 0.3 },
+                    },
+                  }}
+                  className="relative mt-[95px] z-10"
                 >
-                  Hire {profiles[currentIndex].first_name}
-                </NativeButton>
-                <div className="h-px w-12 bg-orange-primary rounded-full" />
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+                  <div className="w-[180px] h-[180px] rounded-full bg-card-black overflow-hidden relative border-4 border-white/10 shadow-xl">
+                    <Image
+                      src={profiles[currentIndex].image}
+                      alt={profiles[currentIndex].name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Text Info */}
+                <div className="relative z-10 mt-6 flex flex-col items-center text-center">
+                  <motion.p
+                    variants={{
+                      hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        filter: "blur(0px)",
+                        transition: { duration: 0.5, ease: "easeOut" },
+                      },
+                      exit: {
+                        opacity: 0,
+                        y: -20,
+                        filter: "blur(10px)",
+                        transition: { duration: 0.3 },
+                      },
+                    }}
+                    className="text-white text-sm font-medium mb-4"
+                  >
+                    {profiles[currentIndex].location}
+                  </motion.p>
+                  <motion.h3
+                    variants={{
+                      hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        filter: "blur(0px)",
+                        transition: { duration: 0.5, ease: "easeOut" },
+                      },
+                      exit: {
+                        opacity: 0,
+                        y: -20,
+                        filter: "blur(10px)",
+                        transition: { duration: 0.3 },
+                      },
+                    }}
+                    className="text-white text-[28px] font-medium leading-tight tracking-tight"
+                  >
+                    {profiles[currentIndex].name}
+                  </motion.h3>
+                  <motion.p
+                    variants={{
+                      hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        filter: "blur(0px)",
+                        transition: { duration: 0.5, ease: "easeOut" },
+                      },
+                      exit: {
+                        opacity: 0,
+                        y: -20,
+                        filter: "blur(10px)",
+                        transition: { duration: 0.3 },
+                      },
+                    }}
+                    className="text-white/80 text-[22px] font-normal leading-tight"
+                  >
+                    {profiles[currentIndex].role}
+                  </motion.p>
+                </div>
+
+                {/* Action Area */}
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      filter: "blur(0px)",
+                      transition: { duration: 0.5, ease: "easeOut" },
+                    },
+                    exit: {
+                      opacity: 0,
+                      y: -20,
+                      filter: "blur(10px)",
+                      transition: { duration: 0.3 },
+                    },
+                  }}
+                  className="relative z-10 mt-10 mb-10 flex items-center justify-center gap-6 w-full px-6"
+                >
+                  <div className="h-px w-12 bg-orange-primary rounded-full" />
+                  <NativeButton
+                    className="bg-white text-orange-primary hover:bg-zinc-100 rounded-full h-[52px] px-8 text-sm font-medium shadow-lg hover:shadow-orange-primary/20"
+                    glow={false}
+                  >
+                    Hire {profiles[currentIndex].first_name}
+                  </NativeButton>
+                  <div className="h-px w-12 bg-orange-primary rounded-full" />
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </MouseTiltCard>
       </div>
 
       {/* World Map */}
