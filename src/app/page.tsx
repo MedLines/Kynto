@@ -25,8 +25,8 @@ export default function Home() {
       <Solutions />
       <Borderless />
       <Pricing />
-      <LogoMarquee />
       <Process />
+      <LogoMarquee />
       <Investors />
       <Testimonials />
       <Resources />
