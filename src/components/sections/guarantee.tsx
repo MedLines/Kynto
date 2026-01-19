@@ -81,7 +81,7 @@ export default function Guarantee() {
   };
 
   return (
-    <section className="relative w-full py-16 md:py-24 bg-white font-poppins overflow-hidden">
+    <section className="relative z-20 w-full py-16 md:py-24 bg-white font-poppins overflow-hidden rounded-b-[2.5rem]">
       <div className="kynto-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
           {/* Left Content */}

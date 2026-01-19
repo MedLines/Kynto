@@ -1,5 +1,6 @@
 "use client";
 
+import { FlippingCard } from "@/components/ui/flipping-card";
 import { NativeBadge } from "@/components/ui/native-badge";
 import { NativeButton } from "@/components/ui/native-button";
 import { Separator } from "@/components/ui/separator";
@@ -8,9 +9,105 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 
+// Reusable Back Content for Cards
+const CardBackGradient = () => (
+  <div className="w-full h-full bg-linear-to-br from-zinc-800 to-black border border-white/5 rounded-[40px] flex items-center justify-center">
+    <div className="w-24 h-24 bg-white/5 blur-3xl rounded-full" />
+  </div>
+);
+
+// Configuration for Solution Cards
+const SOLUTIONS_DATA = [
+  {
+    key: "eor",
+    title: "EOR",
+    number: "01",
+    description: "Hire full-time employees without a legal entity.",
+    gridClass: "md:col-start-2 md:row-start-1",
+    direction: "vertical",
+    transformOrigin: "top",
+    delay: 0.1,
+    textClass: "group-hover:text-green-primary",
+    numberClass: "group-hover:text-green-primary/20",
+    hoverBackground: (
+      <div
+        className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          backgroundImage: `
+          radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--color-green-primary), transparent 40%) 0%, transparent 60%),
+          radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--color-green-primary), transparent 60%) 0%, transparent 70%),
+          radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--color-green-primary), transparent 70%) 0%, transparent 80%)
+        `,
+        }}
+      />
+    ),
+  },
+  {
+    key: "contractors",
+    title: "Contractors",
+    number: "02",
+    description: "Pay freelancers in 150+ currencies instantly.",
+    gridClass: "md:col-start-2 md:row-start-2",
+    direction: "horizontal",
+    transformOrigin: "left",
+    delay: 0.2,
+    textClass: "group-hover:text-orange-primary",
+    numberClass: "group-hover:text-orange-primary/20",
+    hoverBackground: (
+      <div
+        className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          backgroundImage: `radial-gradient(circle 500px at 50% 300px, color-mix(in srgb, var(--color-orange-primary), transparent 65%), transparent)`,
+        }}
+      />
+    ),
+  },
+  {
+    key: "payroll",
+    title: "Global Payroll",
+    number: "03",
+    description: "Consolidate multi-country payroll into one invoice.",
+    gridClass: "md:col-start-3 md:row-start-2",
+    direction: "horizontal",
+    transformOrigin: "left",
+    delay: 0.4,
+    textClass: "group-hover:text-blue-primary",
+    numberClass: "group-hover:text-blue-primary/20",
+    hoverBackground: (
+      <div
+        className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in srgb, var(--color-blue-primary), transparent 75%), transparent 70%)",
+        }}
+      />
+    ),
+  },
+  {
+    key: "visa",
+    title: "Visa & Mobility",
+    number: "04",
+    description: "We handle immigration and relocation paperwork.",
+    gridClass: "md:col-start-3 md:row-start-3",
+    direction: "vertical",
+    transformOrigin: "top",
+    delay: 0.2,
+    textClass: "group-hover:text-green-primary",
+    numberClass: "group-hover:text-green-primary/20",
+    hoverBackground: (
+      <div
+        className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          backgroundImage: `radial-gradient(circle 500px at 50% 300px, color-mix(in srgb, var(--color-green-primary), transparent 65%), transparent)`,
+        }}
+      />
+    ),
+  },
+] as const;
+
 export default function Solutions() {
   return (
-    <section className="relative w-full py-24 md:py-32 bg-black overflow-hidden">
+    <section className="relative w-full -mt-16 pt-40 pb-24 md:pt-48 md:pb-32 bg-black overflow-hidden group/section">
       {/* Background Gradient */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] pointer-events-none select-none z-0 mix-blend-screen opacity-80">
         <Image
@@ -22,9 +119,19 @@ export default function Solutions() {
         />
       </div>
 
+      {/* Earth Sphere Background */}
+      <div className="absolute -bottom-24 -left-24 w-[700px] h-[700px] pointer-events-none select-none z-0 opacity-40 mix-blend-screen">
+        <Image
+          src="/elements/earth-sphere.svg"
+          alt="Earth Sphere"
+          fill
+          className="object-contain object-bottom-left"
+        />
+      </div>
+
       <div className="kynto-container relative z-10 w-full max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-6">
-          {/* Row 1, Col 1: Existing Text */}
+          {/* Main Title Section */}
           <div className="md:col-start-1 md:row-start-1 flex flex-col justify-center h-full w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -56,127 +163,49 @@ export default function Solutions() {
             </motion.div>
           </div>
 
-          {/* Row 1, Col 2: EOR Card */}
-          <div className="md:col-start-2 md:row-start-1 flex items-center justify-center w-full h-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="w-full aspect-square relative bg-card-black rounded-[40px] p-10 flex flex-col justify-between overflow-hidden group border border-white/5 hover:border-white/10 transition-colors"
+          {/* Render All Solution Cards */}
+          {SOLUTIONS_DATA.map((card) => (
+            <div
+              key={card.key}
+              className={`${card.gridClass} flex items-center justify-center w-full h-full`}
             >
-              <span className="text-white font-semibold text-2xl tracking-wide">
-                EOR
-              </span>
+              <FlippingCard
+                className="w-full aspect-square"
+                direction={card.direction}
+                delay={card.delay}
+                transformOrigin={card.transformOrigin}
+                backContent={<CardBackGradient />}
+                frontContent={
+                  <div className="w-full h-full relative bg-card-black rounded-[40px] p-10 flex flex-col justify-between overflow-hidden group border border-white/5 hover:border-white/10 transition-colors">
+                    {/* Hover Background - Specific to each card */}
+                    {card.hoverBackground}
 
-              <div className="absolute -bottom-20 -left-6 text-[240px] font-bold text-white/3 leading-none select-none pointer-events-none group-hover:text-white/5 transition-colors duration-500">
-                01.
-              </div>
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                      <span
+                        className={`text-white font-semibold text-2xl tracking-wide ${card.textClass} transition-colors duration-300`}
+                      >
+                        {card.title}
+                      </span>
 
-              <div className="relative z-10 self-end max-w-[300px] text-right mt-auto">
-                <p className="text-kynto-gray-30 text-2xl leading-relaxed pt-20">
-                  Hire full-time employees without a legal entity.
-                </p>
-                <div className="w-3 h-3 rounded-full bg-zinc-700 mt-6 ml-auto"></div>
-              </div>
-            </motion.div>
-          </div>
+                      <div
+                        className={`absolute -bottom-20 -left-6 text-[240px] font-bold text-white/3 leading-none select-none pointer-events-none ${card.numberClass} transition-colors duration-500`}
+                      >
+                        {card.number}.
+                      </div>
 
-          {/* Row 2, Col 2: Contractors Card */}
-          <div className="md:col-start-2 md:row-start-2 flex items-center justify-center w-full h-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: 0.3,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="w-full aspect-square relative bg-card-black rounded-[40px] p-10 flex flex-col justify-between overflow-hidden group border border-white/5 hover:border-white/10 transition-colors"
-            >
-              <span className="text-white font-semibold text-2xl tracking-wide">
-                Contractors
-              </span>
+                      <div className="self-end max-w-[300px] text-right mt-auto">
+                        <p className="text-kynto-gray-30 text-2xl leading-relaxed pt-20">
+                          {card.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            </div>
+          ))}
 
-              <div className="absolute -bottom-20 -left-6 text-[240px] font-bold text-white/3 leading-none select-none pointer-events-none group-hover:text-white/5 transition-colors duration-500">
-                02.
-              </div>
-
-              <div className="relative z-10 self-end max-w-[300px] text-right mt-auto">
-                <p className="text-kynto-gray-30 text-2xl leading-relaxed pt-20">
-                  Pay freelancers in 150+ currencies instantly.
-                </p>
-                <div className="w-3 h-3 rounded-full bg-zinc-700 mt-6 ml-auto"></div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Row 2, Col 3: Global Payroll Card */}
-          <div className="md:col-start-3 md:row-start-2 flex items-center justify-center w-full h-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: 0.4,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="w-full aspect-square relative bg-card-black rounded-[40px] p-10 flex flex-col justify-between overflow-hidden group border border-white/5 hover:border-white/10 transition-colors"
-            >
-              <span className="text-white font-semibold text-2xl tracking-wide">
-                Global Payroll
-              </span>
-
-              <div className="absolute -bottom-20 -left-6 text-[240px] font-bold text-white/3 leading-none select-none pointer-events-none group-hover:text-white/5 transition-colors duration-500">
-                03.
-              </div>
-
-              <div className="relative z-10 self-end max-w-[300px] text-right mt-auto">
-                <p className="text-kynto-gray-30 text-2xl leading-relaxed pt-20">
-                  Consolidate multi-country payroll into one invoice.
-                </p>
-                <div className="w-3 h-3 rounded-full bg-zinc-700 mt-6 ml-auto"></div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Row 3, Col 3: Visa & Mobility Card */}
-          <div className="md:col-start-3 md:row-start-3 flex items-center justify-center w-full h-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="w-full aspect-square relative bg-card-black rounded-[40px] p-10 flex flex-col justify-between overflow-hidden group border border-white/5 hover:border-white/10 transition-colors"
-            >
-              <span className="text-white font-semibold text-2xl tracking-wide">
-                Visa & Mobility
-              </span>
-
-              <div className="absolute -bottom-20 -left-6 text-[240px] font-bold text-white/3 leading-none select-none pointer-events-none group-hover:text-white/5 transition-colors duration-500">
-                04.
-              </div>
-
-              <div className="relative z-10 self-end max-w-[300px] text-right mt-auto">
-                <p className="text-kynto-gray-30 text-2xl leading-relaxed pt-20">
-                  We handle immigration and relocation paperwork.
-                </p>
-                <div className="w-3 h-3 rounded-full bg-zinc-700 mt-6 ml-auto"></div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Row 1, Col 3: Global Support */}
+          {/* Global Support Card */}
           <div className="md:col-start-3 md:row-start-1 flex items-center justify-center w-full h-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -184,7 +213,7 @@ export default function Solutions() {
               viewport={{ once: true }}
               transition={{
                 duration: 0.8,
-                delay: 0.2,
+                delay: 0.2, // Kept original delay logic for this one as it's not a flipping card
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="w-full h-full relative rounded-[40px] overflow-hidden flex items-start justify-center p-8 group border border-transparent"

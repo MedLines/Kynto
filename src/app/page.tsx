@@ -4,6 +4,7 @@ import Guarantee from "@/components/sections/guarantee";
 import Hero from "@/components/sections/hero";
 import Integrations from "@/components/sections/integrations";
 
+import Borderless from "@/components/sections/borderless";
 import Investors from "@/components/sections/investors";
 import LogoMarquee from "@/components/sections/logo-marquee";
 import OurMission from "@/components/sections/our-mission";
@@ -12,7 +13,6 @@ import Process from "@/components/sections/process";
 import Resources from "@/components/sections/resources";
 import Solutions from "@/components/sections/solutions";
 import Testimonials from "@/components/sections/testimonials";
-import WorldMap from "@/components/sections/world-map";
 
 export default function Home() {
   return (
@@ -23,8 +23,8 @@ export default function Home() {
       <Integrations />
       <Guarantee />
       <Solutions />
+      <Borderless />
       <LogoMarquee />
-      <WorldMap />
       <Pricing />
       <Process />
       <Investors />
