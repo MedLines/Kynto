@@ -107,7 +107,10 @@ const SOLUTIONS_DATA = [
 
 export default function Solutions() {
   return (
-    <section className="relative w-full -mt-16 pt-40 pb-24 md:pt-48 md:pb-32 bg-black overflow-hidden group/section">
+    <section
+      id="solutions"
+      className="relative w-full -mt-16 pt-40 pb-24 md:pt-48 md:pb-32 bg-black overflow-hidden group/section scroll-mt-24"
+    >
       {/* Background Gradient */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] pointer-events-none select-none z-0 mix-blend-screen opacity-80">
         <Image
@@ -138,7 +141,7 @@ export default function Solutions() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-start w-full max-w-lg h-full justify-between"
+              className="flex flex-col items-center text-center w-full max-w-lg mx-auto h-full justify-between"
             >
               <NativeBadge
                 className="mb-8 bg-card-black text-white hover:bg-zinc-800 border border-white/5 backdrop-blur-md"

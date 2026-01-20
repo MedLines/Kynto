@@ -4,6 +4,7 @@ import { Button, ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { ReactNode } from "react";
 
 export interface NativeButtonProps extends ButtonProps {
@@ -14,14 +15,16 @@ export interface NativeButtonProps extends ButtonProps {
 
 const NativeButton = ({
   className,
+  containerClassName,
   variant = "default",
   size = "lg",
   children,
   loading = false,
   glow = false,
   disabled,
+  href,
   ...props
-}: NativeButtonProps) => {
+}: NativeButtonProps & { href?: string; containerClassName?: string }) => {
   const shouldReduceMotion = useReducedMotion();
 
   const buttonContent = (
@@ -64,7 +67,7 @@ const NativeButton = ({
         !disabled && !loading && !shouldReduceMotion ? { scale: 0.98 } : {}
       }
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      className="relative block w-fit"
+      className={cn("relative block w-fit", containerClassName)}
     >
       {glow && !disabled && !loading && (
         <div className="absolute inset-0 rounded-full bg-blue-primary/20 blur-xl opacity-0 hover:opacity-100 transition-opacity duration-500" />
@@ -75,9 +78,10 @@ const NativeButton = ({
         className={glassmorphismClassName}
         disabled={disabled || loading}
         aria-busy={loading}
+        asChild={!!href}
         {...props}
       >
-        {buttonContent}
+        {href ? <Link href={href}>{buttonContent}</Link> : buttonContent}
       </Button>
     </motion.div>
   );

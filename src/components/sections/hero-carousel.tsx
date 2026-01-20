@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Check, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, type PanInfo } from "motion/react";
 import Image from "next/image";
 
 interface Profile {
@@ -45,25 +46,51 @@ export function HeroCarousel({
         if (Math.abs(pos) > 1) return null;
 
         return (
-          <div
+          <motion.div
             key={profile.id}
             className={cn(
-              "absolute w-[55%] aspect-square max-w-[300px] rounded-4xl shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]",
-              "flex items-center justify-center overflow-hidden cursor-pointer border-2 border-kynto-white/20",
+              "absolute w-[55%] aspect-square max-w-[300px] rounded-4xl shadow-2xl",
+              "flex items-center justify-center overflow-hidden border-2 border-kynto-white/20",
               profile.bgColor === "bg-gray-800"
                 ? "bg-gray-800"
                 : "bg-kynto-black",
+              isCenter
+                ? "cursor-grab active:cursor-grabbing touch-pan-y"
+                : "cursor-pointer",
             )}
-            style={{
-              transform: `
-                  translateX(${pos * 40}%) 
-                  scale(${isCenter ? 1 : 0.85}) 
-                  rotateY(${pos * -25}deg)
-                  translateZ(${isCenter ? 0 : -50}px)
-                `,
+            initial={false}
+            animate={{
+              x: `${pos * 40}%`,
+              scale: isCenter ? 1 : 0.85,
+              rotateY: pos * -25,
+              z: isCenter ? 0 : -50,
               zIndex: isCenter ? 20 : 10,
               opacity: isCenter ? 1 : 0.4,
               filter: isCenter ? "blur(0px)" : "blur(2px)",
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [0.25, 0.8, 0.25, 1],
+            }}
+            drag={isCenter ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_, { offset, velocity }: PanInfo) => {
+              if (!isCenter) return;
+              const swipe = Math.abs(offset.x) * velocity.x;
+              const swipeThreshold = 50;
+
+              if (
+                offset.x < -swipeThreshold ||
+                (offset.x < 0 && velocity.x < -500)
+              ) {
+                onNext();
+              } else if (
+                offset.x > swipeThreshold ||
+                (offset.x > 0 && velocity.x > 500)
+              ) {
+                onPrev();
+              }
             }}
             onClick={() => {
               if (!isCenter) {
@@ -108,7 +135,7 @@ export function HeroCarousel({
                 {profile.location}
               </p>
             </div>
-          </div>
+          </motion.div>
         );
       })}
 

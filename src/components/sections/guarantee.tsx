@@ -86,7 +86,7 @@ export default function Guarantee() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
           {/* Left Content */}
           <div className="flex flex-col items-start h-full justify-between py-6 w-full">
-            <div className="flex flex-col gap-8 w-full items-center lg:items-start">
+            <div className="flex flex-col gap-8 w-full items-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ export default function Guarantee() {
 
               <div className="flex flex-col gap-10 w-full items-center lg:items-start">
                 <motion.h2
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-normal tracking-tight text-kynto-black leading-[1.1] text-center lg:text-left w-full"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-normal tracking-tight text-kynto-black leading-[1.1] text-center w-full"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
@@ -115,7 +115,7 @@ export default function Guarantee() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="w-full sm:w-auto flex justify-center lg:justify-start mb-12 sm:mb-0"
+                  className="w-full sm:w-auto flex justify-center mb-12 sm:mb-0"
                 >
                   <NativeButton
                     size="lg"

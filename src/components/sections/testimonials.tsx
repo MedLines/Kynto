@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/carousel";
 import { NativeBadge } from "@/components/ui/native-badge";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const testimonials = [
@@ -19,6 +20,7 @@ const testimonials = [
       "We needed specific engineers in Poland and Brazil yesterday. Setting up legal entities would have killed our roadmap. This platform got us the talent in 48 hours.",
     author: "Alex V.",
     role: "VP of Engineering",
+    image: "/people/1.jpg",
   },
   {
     company: "Veridian Systems",
@@ -26,6 +28,7 @@ const testimonials = [
       "I don’t lose sleep over misclassification. Knowing you handle global liability is priceless.",
     author: "Sarah Jenkins",
     role: "Head of People",
+    image: "/people/3.jpg",
   },
   {
     company: "Opus Financial",
@@ -33,6 +36,7 @@ const testimonials = [
       "We replaced 12 payroll systems with one monthly invoice. It saved us 20 hours a week.",
     author: "Marcus Thorne",
     role: "COO",
+    image: "/people/2.jpg",
   },
   {
     company: "TechFlow",
@@ -40,6 +44,7 @@ const testimonials = [
       "The automated compliance checks save our HR team countless hours every week.",
     author: "David Chen",
     role: "CTO",
+    image: "/people/4.jpg",
   },
   {
     company: "GlobalReach",
@@ -47,6 +52,7 @@ const testimonials = [
       "Finally a solution that understands the complexities of hiring across multiple jurisdictions.",
     author: "Emma Wilson",
     role: "Director of Ops",
+    image: "/people/5.jpg",
   },
 ];
 
@@ -83,7 +89,7 @@ export default function Testimonials() {
 
           <div className="relative z-10 flex flex-col items-center gap-16 md:gap-24 max-w-[1440px] mx-auto">
             {/* Header */}
-            <div className="flex flex-col items-start w-full gap-6 md:gap-8 max-w-[1280px] px-4 md:px-12">
+            <div className="flex flex-col items-center text-center w-full gap-6 md:gap-8 max-w-[1280px] px-4 md:px-12">
               <NativeBadge
                 className="bg-white text-foreground border-none px-4 py-2"
                 dotClass="bg-black"
@@ -111,7 +117,7 @@ export default function Testimonials() {
                     return (
                       <CarouselItem
                         key={index}
-                        className="pl-4 md:pl-6 py-12 basis-full md:basis-[60%] lg:basis-[60%]"
+                        className="pl-4 md:pl-6 py-12 basis-[85%] md:basis-[60%] lg:basis-[60%]"
                       >
                         <div
                           className={cn(
@@ -133,10 +139,19 @@ export default function Testimonials() {
                             </h3>
                             <div
                               className={cn(
-                                "w-20 h-20 md:w-24 md:h-24 rounded-2xl",
-                                isActive ? "bg-white/20" : "bg-[#C4C4C4]",
+                                "relative w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden shadow-sm",
+                                isActive
+                                  ? "ring-2 ring-white/20"
+                                  : "ring-1 ring-black/5",
                               )}
-                            ></div>
+                            >
+                              <Image
+                                src={testimonial.image}
+                                alt={testimonial.author}
+                                fill
+                                className="object-cover object-top"
+                              />
+                            </div>
                           </div>
 
                           {/* Quote */}

@@ -16,7 +16,10 @@ export default function Pricing() {
   const eorPrice = billingCycle === "monthly" ? 599 : 479;
 
   return (
-    <section className="relative z-20 pt-24 pb-24 -mt-16 bg-white w-full rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden">
+    <section
+      id="pricing"
+      className="relative z-20 pt-24 pb-24 -mt-16 bg-white w-full rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden scroll-mt-24"
+    >
       <div className="container px-4 mx-auto">
         <div className="flex flex-col items-center gap-12 max-w-[1440px] mx-auto">
           {/* Header */}

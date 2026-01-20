@@ -120,7 +120,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Masked Text Reveal H1 */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-none md:leading-[0.95] flex flex-col items-center lg:items-start">
+          <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-none md:leading-[0.95] flex flex-col items-center lg:items-start">
             <span className="block overflow-hidden pb-1 sm:pb-2">
               <motion.span
                 variants={textRevealVariants}

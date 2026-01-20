@@ -33,11 +33,14 @@ const processSteps = [
 
 export default function Process() {
   return (
-    <section className="relative z-20 pt-24 pb-48 bg-white w-full rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden -mt-24">
+    <section
+      id="process"
+      className="relative z-20 pt-24 pb-48 bg-white w-full rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden -mt-24 scroll-mt-24"
+    >
       <div className="container px-4 mx-auto">
         <div className="flex flex-col items-center gap-16 md:gap-24 max-w-[1440px] mx-auto">
           {/* Header */}
-          <div className="flex flex-col items-start w-full gap-6 md:gap-8 max-w-[1280px]">
+          <div className="flex flex-col items-center text-center w-full gap-6 md:gap-8 max-w-[1280px]">
             <NativeBadge
               className="bg-secondary text-foreground border-none px-4 py-2"
               dotClass="bg-black"

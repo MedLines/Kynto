@@ -1,123 +1,196 @@
-import Link from "next/link";
-import { Container } from "./section";
+"use client";
 
-const footerLinks = {
-  product: [
-    { href: "#solutions", label: "Solutions" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#integrations", label: "Integrations" },
-  ],
-  company: [
-    { href: "#about", label: "About Us" },
-    { href: "#investors", label: "Investors" },
-    { href: "#resources", label: "Resources" },
-  ],
-  legal: [
-    { href: "/privacy", label: "Privacy Policy" },
-    { href: "/terms", label: "Terms of Service" },
-    { href: "/cookies", label: "Cookie Policy" },
-  ],
-};
+import { ContactModalContent } from "@/components/sections/contact-modal-content";
+import {
+  ExpandableScreen,
+  ExpandableScreenContent,
+  ExpandableScreenTrigger,
+} from "@/components/ui/expandable-screen";
+import { NativeButton } from "@/components/ui/native-button";
+import { ArrowRight, Instagram, Linkedin, Mail, Twitter } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-card text-card-foreground py-16">
-      <Container>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {/* Logo & Description */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="font-bold text-primary-foreground text-sm">
-                  K
+    <footer className="bg-black py-8 md:py-12 font-poppins">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* LEFT CARD - Info & Links */}
+          <div className="lg:col-span-2 relative bg-card-black rounded-[40px] p-8 md:p-12 overflow-hidden flex flex-col justify-between min-h-[500px]">
+            {/* Background Earth Sphere */}
+            <div className="absolute right-[-100px] top-[-50px] w-[600px] h-[600px] pointer-events-none opacity-40 mix-blend-lighten rotate-[345deg]">
+              <Image
+                src="/elements/earth-sphere.svg"
+                alt="Earth Sphere"
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            {/* Content Top */}
+            <div className="relative z-10 space-y-6">
+              {/* Logo */}
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-3xl text-white italic tracking-tight">
+                  Kynto
                 </span>
               </div>
-              <span className="font-semibold text-lg">Kynto</span>
-            </Link>
-            <p className="text-sm text-muted-foreground">
-              The Operating System for Global HR. Hire anyone, anywhere.
-            </p>
+              <p className="text-[#BBBBBB] text-base max-w-sm   leading-6">
+                The all-in-one platform for global employment.
+              </p>
+            </div>
+
+            {/* Links Grid */}
+            <div className="relative z-10 grid grid-cols-2 md:grid-cols-3 gap-8 mt-16 md:mt-24 mb-12">
+              <div className="flex flex-col gap-4">
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  Global EOR
+                </Link>
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  Contractor Pay
+                </Link>
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  Pricing
+                </Link>
+              </div>
+              <div className="flex flex-col gap-4">
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  Careers
+                </Link>
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  Contact
+                </Link>
+              </div>
+              <div className="flex flex-col gap-4">
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  Case Studies
+                </Link>
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  Hiring Guides
+                </Link>
+                <Link
+                  href="#"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  Help Center
+                </Link>
+              </div>
+            </div>
+
+            {/* Bottom Copyright */}
+            <div className="relative z-10 pt-4">
+              <p className="text-sm text-white/40">
+                © {new Date().getFullYear()} Kynto. All Right Reserved
+              </p>
+            </div>
           </div>
 
-          {/* Product Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Product</h4>
-            <ul className="space-y-2">
-              {footerLinks.product.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* RIGHT CARD - Socials & Contact */}
+          <div className="lg:col-span-1 relative bg-card-black rounded-[40px] p-8 md:p-10 overflow-hidden flex flex-col min-h-[500px]">
+            {/* Header */}
+            <div className="flex flex-col gap-1 mb-10">
+              <h3 className="text-[28px] leading-[36px] text-white  ">
+                Explore the Socials
+              </h3>
+              <h3 className="text-[28px] leading-[36px] text-white  ">
+                of <span className="italic font-bold">Kynto</span>
+              </h3>
+            </div>
 
-          {/* Company Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* Social Icons */}
+            <div className="flex gap-3 mb-auto">
+              <Link
+                href="#"
+                className="w-[46px] h-[46px] rounded-full border border-[#494949] flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+              >
+                <Twitter className="w-[18px] h-[18px]" />
+              </Link>
+              <Link
+                href="#"
+                className="w-[46px] h-[46px] rounded-full border border-[#494949] flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+                title="Instagram"
+              >
+                <Instagram className="w-[18px] h-[18px]" />
+              </Link>
+              <Link
+                href="#"
+                className="w-[46px] h-[46px] rounded-full border border-[#494949] flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+              >
+                <Linkedin className="w-[18px] h-[18px]" />
+              </Link>
+            </div>
 
-          {/* Legal Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2">
-              {footerLinks.legal.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            {/* Contact Section */}
+            <div className="mt-12 space-y-4">
+              <div className="flex items-center gap-2 text-white mb-2">
+                <Mail className="w-5 h-5" />
+                <span className="text-sm ">Reach out!</span>
+              </div>
+
+              <ExpandableScreen>
+                <ExpandableScreenTrigger className="w-full">
+                  <NativeButton
+                    containerClassName="w-full"
+                    className="w-full h-[46px] rounded-full border border-white/10 bg-card-black hover:bg-card-black hover:border-white/20 px-5 py-0 group shadow-none justify-start"
                   >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                    <span className="text-sm text-white/80">Contact Us</span>
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </NativeButton>
+                </ExpandableScreenTrigger>
+                <ExpandableScreenContent className="bg-card-black font-poppins text-white">
+                  <ContactModalContent />
+                </ExpandableScreenContent>
+              </ExpandableScreen>
+
+              {/* Links */}
+              <div className="flex gap-6 pt-4">
+                <Link
+                  href="#"
+                  className="text-[10px] text-[#808080] hover:text-white uppercase tracking-wider"
+                >
+                  Terms of Service
+                </Link>
+                <Link
+                  href="#"
+                  className="text-[10px] text-[#808080] hover:text-white uppercase tracking-wider"
+                >
+                  Privacy Policy
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Kynto. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://twitter.com"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Twitter"
-            >
-              <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
-            </Link>
-            <Link
-              href="https://linkedin.com"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="LinkedIn"
-            >
-              <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </Container>
+      </div>
     </footer>
   );
 }

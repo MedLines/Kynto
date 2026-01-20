@@ -62,7 +62,10 @@ const slideUp = {
 
 export default function OurMission() {
   return (
-    <section className="relative w-full py-16 md:py-24 font-poppins overflow-hidden ">
+    <section
+      id="mission"
+      className="relative w-full py-16 md:py-24 font-poppins overflow-hidden scroll-mt-24"
+    >
       <motion.div
         variants={containerVariants}
         initial="hidden"

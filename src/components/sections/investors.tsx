@@ -71,8 +71,8 @@ export default function Investors() {
     <section className="bg-white py-24 w-full font-poppins">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col gap-16">
-          <div className="flex flex-col gap-6 w-full max-w-[530px]">
-            <div className="flex justify-start">
+          <div className="flex flex-col items-center text-center gap-6 w-full max-w-2xl mx-auto">
+            <div className="flex justify-center">
               <NativeBadge className="bg-[#f3f3f3] text-black hover:bg-[#eaeaea]">
                 Investors
               </NativeBadge>
