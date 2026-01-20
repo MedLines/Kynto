@@ -50,7 +50,7 @@ export default function Borderless() {
   }, []);
 
   return (
-    <section className="relative w-full py-24 bg-black overflow-hidden min-h-[800px] flex flex-col items-center justify-start">
+    <section className="relative w-full pt-24 pb-64 bg-black overflow-hidden min-h-[800px] flex flex-col items-center justify-start">
       {/* Content Container - z-20 to be above map */}
       <div className="relative z-20 w-full max-w-7xl px-4 flex flex-col items-center text-center mt-12 md:mt-20">
         <NativeBadge

@@ -1,7 +1,21 @@
 import { NativeBadge } from "@/components/ui/native-badge";
 import Image from "next/image";
 
-const logos = [
+interface LogoImage {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+interface Logo {
+  name: string;
+  width: number;
+  height: number;
+  images: LogoImage[];
+  isVerticalStack?: boolean;
+}
+
+const logos: Logo[] = [
   {
     name: "Y Combinator",
     width: 160,

@@ -6,7 +6,6 @@ import Integrations from "@/components/sections/integrations";
 
 import Borderless from "@/components/sections/borderless";
 import Investors from "@/components/sections/investors";
-import LogoMarquee from "@/components/sections/logo-marquee";
 import OurMission from "@/components/sections/our-mission";
 import Pricing from "@/components/sections/pricing";
 import Process from "@/components/sections/process";
@@ -26,7 +25,6 @@ export default function Home() {
       <Borderless />
       <Pricing />
       <Process />
-      <LogoMarquee />
       <Investors />
       <Testimonials />
       <Resources />
