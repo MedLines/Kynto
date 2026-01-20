@@ -106,8 +106,8 @@ export default function Guarantee() {
                   transition={{ duration: 0.5, delay: 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <span className="italic block">Trusted by</span>
-                  <span className="block font-medium">the best</span>
+                  <span className="italic block">Trusted By</span>
+                  <span className="block font-bold">The Best</span>
                 </motion.h2>
 
                 <motion.div

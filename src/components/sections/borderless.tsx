@@ -62,7 +62,7 @@ export default function Borderless() {
 
         <h2 className="text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight text-white mb-12 font-poppins">
           <span className="block font-light italic opacity-90">Hiring</span>
-          <span className="block font-medium mt-2">without borders</span>
+          <span className="block font-bold mt-2">Without Borders</span>
         </h2>
 
         {/* Profile Card  */}

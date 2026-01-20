@@ -29,7 +29,7 @@ export default function Pricing() {
             </NativeBadge>
             <h2 className="text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight text-foreground font-poppins">
               <span className="block font-light italic opacity-90">Choose</span>
-              <span className="block font-medium mt-2">Your Option</span>
+              <span className="block font-bold mt-2">Your Option</span>
             </h2>
 
             {/* Toggle */}

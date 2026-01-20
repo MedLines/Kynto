@@ -68,7 +68,7 @@ const logos: Logo[] = [
 
 export default function Investors() {
   return (
-    <section className="bg-white py-24 w-full">
+    <section className="bg-white py-24 w-full font-poppins">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col gap-16">
           <div className="flex flex-col gap-6 w-full max-w-[530px]">
@@ -77,18 +77,21 @@ export default function Investors() {
                 Investors
               </NativeBadge>
             </div>
-            <h2 className="text-6xl font-medium tracking-tight text-black font-sans">
-              Backed by the <br /> best
+            <h2 className="text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight text-foreground ">
+              <span className="block font-light italic opacity-90">
+                Backed by the
+              </span>
+              <span className="block font-bold mt-2">Best</span>
             </h2>
           </div>
 
           <div className="flex size-full items-center justify-center bg-background rounded-3xl overflow-hidden">
-            <Marquee>
+            <Marquee className="py-12">
               <MarqueeFade side="left" />
               <MarqueeFade side="right" />
               <MarqueeContent speed={50}>
                 {logos.map((logo, index) => (
-                  <MarqueeItem key={index} className="mx-4">
+                  <MarqueeItem key={index} className="mx-4 py-8">
                     <div className="flex flex-col items-center justify-center w-[216px] h-[216px] rounded-full border border-gray-200 relative shrink-0 bg-white hover:shadow-lg transition-shadow duration-300">
                       {logo.isVerticalStack ? (
                         <div className="flex flex-col items-center gap-2">

@@ -48,7 +48,7 @@ export default function Process() {
               <span className="block font-light italic opacity-90">
                 Onboarding
               </span>
-              <span className="block font-medium mt-2">Process</span>
+              <span className="block font-bold mt-2">Process</span>
             </h2>
           </div>
 

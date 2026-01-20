@@ -75,8 +75,8 @@ export default function Integrations() {
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              <span className="italic font-light block">Plays nice</span>
-              <span className="font-bold block">with your stack</span>
+              <span className="italic font-light block">Plays Nice</span>
+              <span className="font-bold block">With Your Stack</span>
             </motion.h2>
 
             <motion.p
