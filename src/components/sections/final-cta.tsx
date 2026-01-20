@@ -1,7 +1,18 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "motion/react";
 import Link from "next/link";
+
+const EASING = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+  },
+};
 
 export default function FinalCTA() {
   return (
@@ -30,16 +41,48 @@ export default function FinalCTA() {
       />
 
       {/* Content Container */}
-      <div className="container mx-auto px-4 md:px-6 relative h-full z-20 flex flex-col justify-between py-12 md:py-24">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 md:px-6 relative h-full z-20 flex flex-col justify-between py-12 md:py-24"
+      >
         {/* Top Left Text */}
-        <div className="text-white/50 text-xl md:text-2xl font-light tracking-tight">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, x: -40 },
+            visible: {
+              opacity: 1,
+              x: 0,
+              transition: {
+                duration: 0.8,
+                ease: EASING as [number, number, number, number],
+              },
+            },
+          }}
+          className="text-white/50 text-xl md:text-2xl font-light tracking-tight"
+        >
           Ready to <span className="font-semibold text-white">scale your</span>{" "}
           <br />
           <span className="font-semibold text-white">team?</span>
-        </div>
+        </motion.div>
 
         {/* Main Heading Group - Right Aligned */}
-        <div className="flex flex-col items-end text-right mt-auto mb-auto">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, x: 40 },
+            visible: {
+              opacity: 1,
+              x: 0,
+              transition: {
+                duration: 0.8,
+                ease: EASING as [number, number, number, number],
+              },
+            },
+          }}
+          className="flex flex-col items-end text-right mt-auto mb-auto"
+        >
           <h2 className="text-5xl md:text-7xl lg:text-8xl leading-[1.0] tracking-tight text-white mb-8">
             <span className="block font-light italic opacity-90 text-4xl md:text-5xl lg:text-6xl mb-2 text-white/50">
               Let&apos;s start
@@ -59,10 +102,22 @@ export default function FinalCTA() {
               <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
             </div>
           </Link>
-        </div>
+        </motion.div>
 
         {/* Bottom Footer Elements */}
-        <div>
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.7,
+                ease: EASING as [number, number, number, number],
+              },
+            },
+          }}
+        >
           <div className="w-full h-px bg-white/10 mb-6" />
           <div className="flex justify-between items-center text-sm md:text-base text-gray-500 font-medium">
             <div className="flex items-center gap-2">
@@ -74,8 +129,8 @@ export default function FinalCTA() {
               Global Support
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

@@ -27,7 +27,7 @@ export function ActionItemsCard({ constraintsRef }: ActionItemsCardProps) {
         scale: 1.05,
         transition: { duration: 0.1 },
       }}
-      className="absolute top-35 right-10 w-[400px] rounded-[32px] bg-card-black/10 backdrop-blur-md border border-white/20 p-6 flex flex-col gap-4 shadow-2xl z-50 cursor-grab active:cursor-grabbing overflow-hidden group"
+      className="absolute top-35 right-10 w-[400px] rounded-[32px] bg-[#1a1a1a]/95 border border-white/20 p-6 flex flex-col gap-4 shadow-2xl z-50 cursor-grab active:cursor-grabbing overflow-hidden group will-change-transform"
     >
       <span className="text-white font-medium text-lg">Action Items</span>
 

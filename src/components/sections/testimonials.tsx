@@ -10,8 +10,32 @@ import {
 } from "@/components/ui/carousel";
 import { NativeBadge } from "@/components/ui/native-badge";
 import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
+import { div } from "motion/react-client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+const EASING = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: EASING as [number, number, number, number],
+    },
+  },
+};
 
 const testimonials = [
   {
@@ -25,7 +49,7 @@ const testimonials = [
   {
     company: "Veridian Systems",
     quote:
-      "I don’t lose sleep over misclassification. Knowing you handle global liability is priceless.",
+      "I don't lose sleep over misclassification. Knowing you handle global liability is priceless.",
     author: "Sarah Jenkins",
     role: "Head of People",
     image: "/people/3.jpg",
@@ -73,7 +97,13 @@ export default function Testimonials() {
   return (
     <section className="relative w-full py-24 bg-white overflow-hidden">
       <div className="container relative z-10 px-4 mx-auto md:px-6">
-        <div className="relative w-full bg-kynto-gray-100 rounded-[3rem] md:rounded-[4rem] overflow-hidden py-[40px] border border-black/5 ">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative w-full bg-kynto-gray-100 rounded-[3rem] md:rounded-[4rem] overflow-hidden py-[40px] border border-black/5 "
+        >
           {/* Background Grid Pattern */}
           <div
             className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]"
@@ -89,7 +119,10 @@ export default function Testimonials() {
 
           <div className="relative z-10 flex flex-col items-center gap-16 md:gap-24 max-w-[1440px] mx-auto">
             {/* Header */}
-            <div className="flex flex-col items-center text-center w-full gap-6 md:gap-8 max-w-[1280px] px-4 md:px-12">
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col items-center lg:items-start text-center lg:text-left w-full gap-6 md:gap-8 max-w-[1280px] px-4 md:px-12"
+            >
               <NativeBadge
                 className="bg-white text-foreground border-none px-4 py-2"
                 dotClass="bg-black"
@@ -100,9 +133,22 @@ export default function Testimonials() {
                 <span className="block font-light italic opacity-90">What</span>
                 <span className="block font-medium mt-2">Clients Say</span>
               </h2>
-            </div>
+            </motion.div>
 
-            <div className="w-full relative">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.8,
+                    ease: EASING as [number, number, number, number],
+                  },
+                },
+              }}
+              className="w-full relative"
+            >
               <Carousel
                 setApi={setApi}
                 opts={{
@@ -209,9 +255,9 @@ export default function Testimonials() {
                   <CarouselNext className="static translate-y-0 translate-x-0 bg-white cursor-pointer hover:bg-gray-100 border-none w-12 h-12 rounded-full shadow-sm" />
                 </div>
               </Carousel>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

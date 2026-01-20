@@ -3,6 +3,29 @@
 import { NativeBadge } from "@/components/ui/native-badge";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import { section } from "motion/react-client";
+
+const EASING = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: EASING as [number, number, number, number],
+    },
+  },
+};
 
 const processSteps = [
   {
@@ -38,9 +61,18 @@ export default function Process() {
       className="relative z-20 pt-24 pb-48 bg-white w-full rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden -mt-24 scroll-mt-24"
     >
       <div className="container px-4 mx-auto">
-        <div className="flex flex-col items-center gap-16 md:gap-24 max-w-[1440px] mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="flex flex-col items-center gap-16 md:gap-24 max-w-[1440px] mx-auto"
+        >
           {/* Header */}
-          <div className="flex flex-col items-center text-center w-full gap-6 md:gap-8 max-w-[1280px]">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center lg:items-start text-center lg:text-left w-full gap-6 md:gap-8 max-w-[1280px]"
+          >
             <NativeBadge
               className="bg-secondary text-foreground border-none px-4 py-2"
               dotClass="bg-black"
@@ -53,12 +85,24 @@ export default function Process() {
               </span>
               <span className="block font-bold mt-2">Process</span>
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 xl:grid-cols-4 w-full min-h-[600px] relative">
             {processSteps.map((step, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.6,
+                      delay: index * 0.1,
+                      ease: EASING as [number, number, number, number],
+                    },
+                  },
+                }}
                 className={cn(
                   "relative flex flex-col items-start px-6 h-full border-l border-l-gray-200",
                   // Mobile/Tablet: specific vertical spacing
@@ -87,10 +131,10 @@ export default function Process() {
                   </span>
                   <ProcessCard step={step} />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

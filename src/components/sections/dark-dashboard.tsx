@@ -35,11 +35,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -61,11 +60,10 @@ const innerContainerVariant = {
 
 // Sidebar slides in from left
 const sidebarVariant = {
-  hidden: { opacity: 0, x: -50, filter: "blur(10px)" },
+  hidden: { opacity: 0, x: -50 },
   visible: {
     opacity: 1,
     x: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -75,11 +73,10 @@ const sidebarVariant = {
 
 // Main content children slide in from right
 const slideFromRight = {
-  hidden: { opacity: 0, x: 50, filter: "blur(10px)" },
+  hidden: { opacity: 0, x: 50 },
   visible: {
     opacity: 1,
     x: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -157,8 +154,8 @@ export default function DarkDashboard() {
       {/* Dashboard Card Container (Responsive Wrapper) */}
       <div className="kynto-container w-full">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 40, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, scale: 0.9, y: 40 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.0, ease: EASING, delay: 0.2 }}
           ref={containerRef}

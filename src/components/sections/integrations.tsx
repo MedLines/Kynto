@@ -58,7 +58,7 @@ export default function Integrations() {
       <div className="kynto-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Text Content */}
-          <div className="flex flex-col items-center text-center max-w-xl">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

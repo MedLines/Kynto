@@ -27,7 +27,7 @@ export function ComplianceCard({ constraintsRef }: ComplianceCardProps) {
         scale: 1.05,
         transition: { duration: 0.1 },
       }}
-      className="absolute bottom-55 right-30 w-auto h-[100px] rounded-[24px] bg-card-black/10 backdrop-blur-md border border-white/20 p-4 flex items-center gap-4 shadow-2xl z-50 cursor-grab active:cursor-grabbing overflow-hidden group"
+      className="absolute bottom-55 right-30 w-auto h-[100px] rounded-[24px] bg-[#1a1a1a]/95 border border-white/20 p-4 flex items-center gap-4 shadow-2xl z-50 cursor-grab active:cursor-grabbing overflow-hidden group will-change-transform"
     >
       {/* Icon Circle */}
       <div className="w-14 h-14 rounded-full bg-[#A3F39B] flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(163,243,155,0.3)]">

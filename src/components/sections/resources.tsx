@@ -12,8 +12,31 @@ import { NativeButton } from "@/components/ui/native-button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight, ChevronRight, Clock } from "lucide-react";
+import { motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+const EASING = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: EASING as [number, number, number, number],
+    },
+  },
+};
 
 interface Resource {
   author: {
@@ -102,11 +125,19 @@ export default function Resources() {
       id="resources"
       className="bg-white py-24 w-full font-poppins rounded-b-[2.5rem] relative z-20 scroll-mt-24"
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 md:px-6"
+      >
         {/* Header */}
-        {/* Header */}
-        <div className="relative flex flex-col items-center mb-16 gap-8">
-          <div className="flex flex-col gap-6 items-center text-center w-full max-w-3xl">
+        <motion.div
+          variants={itemVariants}
+          className="relative flex flex-col items-center lg:items-start mb-16 gap-8"
+        >
+          <div className="flex flex-col gap-6 items-center lg:items-start text-center lg:text-left w-full max-w-3xl">
             <NativeBadge className="bg-[#f3f3f3] text-black hover:bg-[#eaeaea]">
               Resources
             </NativeBadge>
@@ -124,71 +155,73 @@ export default function Resources() {
               <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
             </NativeButton>
           </div>
-        </div>
+        </motion.div>
 
         {/* Carousel */}
-        <Carousel setApi={setApi} className="w-full">
-          <CarouselContent className="-ml-0">
-            {resources.map((res, index) => (
-              <CarouselItem
-                key={index}
-                className="pl-0 md:basis-1/2 lg:basis-1/3"
-              >
-                <div className="h-full flex">
-                  {/* Card Content */}
-                  <div className="flex flex-col gap-6 group cursor-pointer h-full flex-1 px-8">
-                    {/* Meta */}
-                    <div className="flex justify-between items-center text-xs text-muted-foreground tracking-wider">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-gray-100">
-                          <Image
-                            src={res.author.avatar}
-                            alt={res.author.name}
-                            width={40}
-                            height={40}
-                            className="object-cover w-full h-full"
-                          />
+        <motion.div variants={itemVariants}>
+          <Carousel setApi={setApi} className="w-full">
+            <CarouselContent className="-ml-0">
+              {resources.map((res, index) => (
+                <CarouselItem
+                  key={index}
+                  className="pl-0 md:basis-1/2 lg:basis-1/3"
+                >
+                  <div className="h-full flex">
+                    {/* Card Content */}
+                    <div className="flex flex-col gap-6 group cursor-pointer h-full flex-1 px-8">
+                      {/* Meta */}
+                      <div className="flex justify-between items-center text-xs text-muted-foreground tracking-wider">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-gray-100">
+                            <Image
+                              src={res.author.avatar}
+                              alt={res.author.name}
+                              width={40}
+                              height={40}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-foreground">
+                              {res.author.name}
+                            </span>
+                            <span>{res.author.role}</span>
+                          </div>
                         </div>
-                        <div className="flex flex-col">
-                          <span className="font-bold text-foreground">
-                            {res.author.name}
-                          </span>
-                          <span>{res.author.role}</span>
+                        <div className="flex items-center gap-1 shrink-0">
+                          <Clock className="w-3 h-3" />
+                          {res.readTime}
                         </div>
                       </div>
-                      <div className="flex items-center gap-1 shrink-0">
-                        <Clock className="w-3 h-3" />
-                        {res.readTime}
+
+                      {/* Image */}
+                      <div className="aspect-[16/10] bg-gray-100 rounded-2xl overflow-hidden w-full relative">
+                        <Image
+                          src={res.image}
+                          alt={res.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.15]"
+                        />
                       </div>
+
+                      {/* Title */}
+                      <h3 className="text-xl md:text-2xl font-medium underline decoration-1 underline-offset-4 decoration-transparent group-hover:decoration-foreground transition-all duration-300 line-clamp-2">
+                        {res.title}
+                      </h3>
                     </div>
 
-                    {/* Image */}
-                    <div className="aspect-[16/10] bg-gray-100 rounded-2xl overflow-hidden w-full relative">
-                      <Image
-                        src={res.image}
-                        alt={res.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.15]"
-                      />
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl md:text-2xl font-medium underline decoration-1 underline-offset-4 decoration-transparent group-hover:decoration-foreground transition-all duration-300 line-clamp-2">
-                      {res.title}
-                    </h3>
+                    {/* Separator - Only show if not the last item */}
+                    {index < resources.length - 1 && (
+                      <div className="py-4">
+                        <Separator orientation="vertical" className="h-full" />
+                      </div>
+                    )}
                   </div>
-
-                  {/* Separator - Only show if not the last item */}
-                  {index < resources.length - 1 && (
-                    <div className="py-4">
-                      <Separator orientation="vertical" className="h-full" />
-                    </div>
-                  )}
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </motion.div>
 
         {/* Mobile View Library Button */}
         <div className="md:hidden mt-12 flex justify-center">
@@ -202,7 +235,10 @@ export default function Resources() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-center items-center gap-6 mt-16">
+        <motion.div
+          variants={itemVariants}
+          className="flex justify-center items-center gap-6 mt-16"
+        >
           <Button
             variant="outline"
             size="icon"
@@ -238,8 +274,8 @@ export default function Resources() {
           >
             <ArrowRight className="w-5 h-5" />
           </Button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

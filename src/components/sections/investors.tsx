@@ -8,7 +8,31 @@ import {
   MarqueeFade,
   MarqueeItem,
 } from "@/components/ui/shadcn-io/marquee";
+import { motion } from "motion/react";
+import { section } from "motion/react-client";
 import Image from "next/image";
+
+const EASING = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: EASING as [number, number, number, number],
+    },
+  },
+};
 
 interface LogoImage {
   src: string;
@@ -70,9 +94,18 @@ export default function Investors() {
   return (
     <section className="bg-white py-24 w-full font-poppins">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col gap-16">
-          <div className="flex flex-col items-center text-center gap-6 w-full max-w-2xl mx-auto">
-            <div className="flex justify-center">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="flex flex-col gap-16"
+        >
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 w-full max-w-2xl mx-auto lg:mx-0"
+          >
+            <div className="flex justify-center lg:justify-start">
               <NativeBadge className="bg-[#f3f3f3] text-black hover:bg-[#eaeaea]">
                 Investors
               </NativeBadge>
@@ -83,9 +116,22 @@ export default function Investors() {
               </span>
               <span className="block font-bold mt-2">Best</span>
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="flex size-full items-center justify-center bg-background rounded-3xl overflow-hidden">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.98 },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                transition: {
+                  duration: 0.8,
+                  ease: EASING as [number, number, number, number],
+                },
+              },
+            }}
+            className="flex size-full items-center justify-center bg-background rounded-3xl overflow-hidden"
+          >
             <Marquee className="py-12">
               <MarqueeFade side="left" />
               <MarqueeFade side="right" />
@@ -126,8 +172,8 @@ export default function Investors() {
                 ))}
               </MarqueeContent>
             </Marquee>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

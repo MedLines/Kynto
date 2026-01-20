@@ -22,11 +22,10 @@ const containerVariants = {
 };
 
 const slideRight = {
-  hidden: { opacity: 0, x: -50, filter: "blur(10px)" }, // Comes from left (slide rightwards)
+  hidden: { opacity: 0, x: -50 },
   visible: {
     opacity: 1,
     x: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -35,11 +34,10 @@ const slideRight = {
 };
 
 const slideLeft = {
-  hidden: { opacity: 0, x: 50, filter: "blur(10px)" }, // Comes from right (slide leftwards)
+  hidden: { opacity: 0, x: 50 },
   visible: {
     opacity: 1,
     x: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -48,11 +46,10 @@ const slideLeft = {
 };
 
 const slideUp = {
-  hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,

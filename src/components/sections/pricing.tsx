@@ -5,7 +5,42 @@ import { NativeBadge } from "@/components/ui/native-badge";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import { div } from "motion/react-client";
 import * as React from "react";
+
+const EASING = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: EASING as [number, number, number, number],
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: EASING as [number, number, number, number],
+    },
+  },
+};
 
 export default function Pricing() {
   const [billingCycle, setBillingCycle] = React.useState<"monthly" | "yearly">(
@@ -21,9 +56,18 @@ export default function Pricing() {
       className="relative z-20 pt-24 pb-24 -mt-16 bg-white w-full rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden scroll-mt-24"
     >
       <div className="container px-4 mx-auto">
-        <div className="flex flex-col items-center gap-12 max-w-[1440px] mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="flex flex-col items-center gap-12 max-w-[1440px] mx-auto"
+        >
           {/* Header */}
-          <div className="flex flex-col items-center gap-8 text-center max-w-2xl">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center gap-8 text-center max-w-2xl"
+          >
             <NativeBadge
               className="bg-orange-primary text-white hover:bg-orange-primary/90"
               dotClass="bg-white"
@@ -60,12 +104,15 @@ export default function Pricing() {
                 Yearly (-20%)
               </button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Cards Container */}
           <div className="grid md:grid-cols-2 gap-6 w-full max-w-6xl mx-auto">
             {/* Freelance Management Card */}
-            <div className="group relative rounded-[48px] bg-secondary p-12 flex flex-col items-center text-center gap-8 overflow-hidden transition-all hover:shadow-lg">
+            <motion.div
+              variants={cardVariants}
+              className="group relative rounded-[48px] bg-secondary p-12 flex flex-col items-center text-center gap-8 overflow-hidden transition-all hover:shadow-lg"
+            >
               <NativeBadge
                 className="bg-white/70 border border-white/20 text-black hover:bg-white"
                 dotClass="bg-foreground"
@@ -117,10 +164,13 @@ export default function Pricing() {
                   </Button>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Employer of Record Card */}
-            <div className="group relative rounded-[48px] bg-orange-primary p-12 flex flex-col items-center text-center gap-8 overflow-hidden text-white transition-all hover:shadow-lg">
+            <motion.div
+              variants={cardVariants}
+              className="group relative rounded-[48px] bg-orange-primary p-12 flex flex-col items-center text-center gap-8 overflow-hidden text-white transition-all hover:shadow-lg"
+            >
               <NativeBadge
                 className="bg-white/20 border border-white/20 text-white hover:bg-white/30"
                 dotClass="bg-white"
@@ -174,9 +224,9 @@ export default function Pricing() {
                   </Button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

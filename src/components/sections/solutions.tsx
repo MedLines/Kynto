@@ -141,7 +141,7 @@ export default function Solutions() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-center text-center w-full max-w-lg mx-auto h-full justify-between"
+              className="flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-lg mx-auto lg:mx-0 h-full justify-between"
             >
               <NativeBadge
                 className="mb-8 bg-card-black text-white hover:bg-zinc-800 border border-white/5 backdrop-blur-md"
