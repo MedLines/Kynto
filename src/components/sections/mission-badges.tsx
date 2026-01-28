@@ -57,6 +57,7 @@ export function MissionBadges() {
               background:
                 "linear-gradient(90deg, var(--kynto-blue-primary), var(--kynto-green-secondary), var(--kynto-blue-primary))",
               backgroundSize: "200% 100%",
+              willChange: "background-position",
             }}
             animate={{
               backgroundPosition: ["0% 50%", "200% 50%"],

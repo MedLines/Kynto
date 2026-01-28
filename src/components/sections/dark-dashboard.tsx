@@ -95,32 +95,40 @@ export default function DarkDashboard() {
   const BASE_HEIGHT = 829;
 
   useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        // Measure the container's available width (it's constrained by the section padding)
-        const parentWidth = containerRef.current.clientWidth;
-        const mobile = window.innerWidth < 768; // Standard Tailwind md breakpoint
-        setIsMobile(mobile);
+    let animationFrameId: number;
 
-        // Calculate scale to fit the parent width
-        const newScale = parentWidth / BASE_WIDTH;
-        setScale(newScale);
-      }
+    const handleResize = () => {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(() => {
+        if (containerRef.current) {
+          const parentWidth = containerRef.current.clientWidth;
+          const mobile = window.innerWidth < 768;
+          setIsMobile(mobile);
+
+          const newScale = parentWidth / BASE_WIDTH;
+          setScale(newScale);
+        }
+      });
     };
 
     // Initial calculation
     handleResize();
 
-    // Observe resize
-    const observer = new ResizeObserver(handleResize);
+    // Observe resize with ResizeObserver
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+
     if (containerRef.current) {
-      observer.observe(containerRef.current);
+      resizeObserver.observe(containerRef.current);
     }
 
+    // Fallback window resize listener
     window.addEventListener("resize", handleResize);
 
     return () => {
-      observer.disconnect();
+      cancelAnimationFrame(animationFrameId);
+      resizeObserver.disconnect();
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -163,6 +171,7 @@ export default function DarkDashboard() {
           style={{
             height: `min(${BASE_HEIGHT * scale + (isMobile ? 120 : 0)}px, 85vh)`,
             aspectRatio: `${BASE_WIDTH} / ${BASE_HEIGHT}`,
+            willChange: "transform",
           }}
         >
           {/* Background Image - Moved here to cover extra height */}

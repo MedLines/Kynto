@@ -68,6 +68,7 @@ export default function OurMission() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
+        style={{ willChange: "opacity, transform" }}
         className="kynto-container border-t border-border/50"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
@@ -84,7 +85,6 @@ export default function OurMission() {
                 width={600}
                 height={600}
                 className="w-full h-auto"
-                priority
               />
             </div>
 

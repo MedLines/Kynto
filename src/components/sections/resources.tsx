@@ -74,7 +74,7 @@ const resources: Resource[] = [
     author: {
       name: "Adam H.",
       role: "Admin",
-      avatar: "/resources/ADAM.jpg",
+      avatar: "/resources/Adam.jpg",
     },
     readTime: "8 MIN READ",
     image: "/resources/3.jpg",
@@ -84,7 +84,7 @@ const resources: Resource[] = [
     author: {
       name: "ALEX P.",
       role: "Recruiter",
-      avatar: "/resources/ALEX.jpg",
+      avatar: "/resources/Alex.jpg",
     },
     readTime: "6 MIN READ",
     image: "/resources/4.jpg",
