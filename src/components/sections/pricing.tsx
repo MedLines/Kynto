@@ -5,7 +5,6 @@ import { NativeBadge } from "@/components/ui/native-badge";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { div } from "motion/react-client";
 import * as React from "react";
 
 const EASING = [0.22, 1, 0.36, 1] as const;
@@ -53,7 +52,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative z-20 pt-24 pb-24 -mt-16 bg-white w-full rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden scroll-mt-24"
+      className="relative z-20 pt-24 pb-40 -mt-16 bg-white w-full rounded-t-[3rem] md:rounded-t-[4rem] overflow-hidden scroll-mt-24"
     >
       <div className="container px-4 mx-auto">
         <motion.div

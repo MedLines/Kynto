@@ -105,10 +105,7 @@ const MouseTiltCard: React.FC<MouseTiltCardProps> = ({
   return (
     <motion.div
       ref={cardRef}
-      className={cn(
-        "inline-block cursor-pointer relative preserve-3d",
-        className,
-      )}
+      className={cn("inline-block cursor-pointer relative", className)}
       style={{
         transform,
       }}
@@ -121,7 +118,7 @@ const MouseTiltCard: React.FC<MouseTiltCardProps> = ({
       {/* Glare Effect */}
       {glareEffect && (
         <motion.div
-          className="absolute inset-0 pointer-events-none rounded-[inherit] z-[9999]"
+          className="absolute inset-0 pointer-events-none rounded-[inherit] z-9999"
           style={{
             background,
             opacity: glareOpacity,

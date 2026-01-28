@@ -76,7 +76,7 @@ export default function Borderless() {
           }}
         >
           <NativeBadge
-            className="mb-8 bg-card-black text-white hover:bg-zinc-800 border border-white/5 backdrop-blur-md"
+            className="mb-8 bg-card-black text-white hover:bg-zinc-800 border border-white/5"
             dotClass="bg-white"
           >
             Borderless
@@ -106,7 +106,7 @@ export default function Borderless() {
               opacity: 1,
               y: 0,
               scale: 1,
-              transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+              transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
             },
           }}
         >
@@ -116,7 +116,7 @@ export default function Borderless() {
             glareIntensity={0.2}
             scale={1.02}
           >
-            <div className="relative w-[320px] min-h-[550px] bg-card-black/50 backdrop-blur-xl border border-orange-primary/10 rounded-4xl overflow-hidden flex flex-col items-center shadow-2xl group transition-all duration-500 hover:border-orange-primary/30">
+            <div className="relative w-[320px] min-h-[550px]  bg-card-black/90 border border-orange-primary/10 rounded-4xl overflow-hidden flex flex-col items-center shadow-2xl group transition-all duration-500 hover:border-orange-primary/30">
               <BorderBeam
                 lightColor="var(--color-orange-primary)"
                 lightWidth={900}

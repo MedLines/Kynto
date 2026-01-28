@@ -223,7 +223,7 @@ export default function DarkDashboard() {
               {/* Sidebar Card */}
               <motion.div
                 variants={sidebarVariant}
-                className="w-[280px] h-full flex flex-col gap-6 shrink-0 rounded-2xl  bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm p-5"
+                className="w-[280px] h-full flex flex-col gap-6 shrink-0 rounded-2xl  bg-gradient-to-b from-white/5 to-transparent p-5"
               >
                 <div className="flex items-center gap-2 px-2">
                   {/* Logo Placeholder */}
