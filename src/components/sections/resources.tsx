@@ -242,6 +242,7 @@ export default function Resources() {
           <Button
             variant="outline"
             size="icon"
+            aria-label="Previous resource"
             className="rounded-full w-12 h-12 border-gray-200 cursor-pointer"
             onClick={() => api?.scrollPrev()}
             disabled={!api?.canScrollPrev()}
@@ -254,7 +255,7 @@ export default function Resources() {
               <button
                 key={i}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-300 cursor-pointer",
+                  "w-3 h-3 rounded-full transition-all duration-300 cursor-pointer",
                   i === current - 1
                     ? "bg-black scale-125"
                     : "bg-gray-300 hover:bg-gray-400",
@@ -268,6 +269,7 @@ export default function Resources() {
           <Button
             variant="outline"
             size="icon"
+            aria-label="Next resource"
             className="rounded-full w-12 h-12 border-gray-200 cursor-pointer"
             onClick={() => api?.scrollNext()}
             disabled={!api?.canScrollNext()}

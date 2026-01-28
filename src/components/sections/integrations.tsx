@@ -179,7 +179,7 @@ export default function Integrations() {
                 {/* Background Image */}
                 <Image
                   src="/elements/integration-section/background-image.png"
-                  alt="Background"
+                  alt=""
                   fill
                   className="object-cover absolute inset-0 z-0 opacity-80"
                 />

@@ -129,6 +129,7 @@ export function Footer() {
             <div className="flex gap-3 mb-auto">
               <Link
                 href="#"
+                aria-label="Twitter"
                 className="w-[46px] h-[46px] rounded-full border border-[#494949] flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
               >
                 <Twitter className="w-[18px] h-[18px]" />
@@ -142,6 +143,7 @@ export function Footer() {
               </Link>
               <Link
                 href="#"
+                aria-label="LinkedIn"
                 className="w-[46px] h-[46px] rounded-full border border-[#494949] flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
               >
                 <Linkedin className="w-[18px] h-[18px]" />
@@ -176,13 +178,13 @@ export function Footer() {
               <div className="flex gap-6 pt-4">
                 <Link
                   href="#"
-                  className="text-[10px] text-[#808080] hover:text-white uppercase tracking-wider"
+                  className="text-[10px] text-[#999999] hover:text-white uppercase tracking-wider"
                 >
                   Terms of Service
                 </Link>
                 <Link
                   href="#"
-                  className="text-[10px] text-[#808080] hover:text-white uppercase tracking-wider"
+                  className="text-[10px] text-[#999999] hover:text-white uppercase tracking-wider"
                 >
                   Privacy Policy
                 </Link>

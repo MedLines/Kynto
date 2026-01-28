@@ -80,9 +80,9 @@ export function HeroCard() {
 
       {/* Bottom Info - Dynamic */}
       <div className="flex flex-col gap-5 mt-auto z-10 shrink-0 min-h-[90px]">
-        <h3 className="text-kynto-white text-2xl md:text-3xl  tracking-tight leading-tight transition-all duration-300">
+        <h2 className="text-kynto-white text-2xl md:text-3xl  tracking-tight leading-tight transition-all duration-300">
           {currentProfile.role}
-        </h3>
+        </h2>
         <div className="flex items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2">
             {currentProfile.tags.map((tech, index) => (
@@ -95,7 +95,10 @@ export function HeroCard() {
               </span>
             ))}
           </div>
-          <button className="w-10 h-10 rounded-full border-2 border-green-border flex group items-center justify-center text-kynto-white   transition-all duration-300 group shrink-0 hover:bg-green-primary">
+          <button
+            aria-label="View profile"
+            className="w-10 h-10 rounded-full border-2 border-green-border flex group items-center justify-center text-kynto-white   transition-all duration-300 group shrink-0 hover:bg-green-primary"
+          >
             <ArrowUpRight className="w-5 h-5 transition-transform group-hover:rotate-45 text-green-primary group-hover:text-kynto-black" />
           </button>
         </div>

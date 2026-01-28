@@ -157,6 +157,7 @@ export default function Pricing() {
                   </div>
                   <Button
                     size="icon"
+                    aria-label="Learn more about Freelance Management"
                     className="h-14 w-14 rounded-full bg-white text-foreground hover:bg-orange-primary hover:text-white hover:border-white shadow-sm border-2 border-border group cursor-pointer transition-all duration-300"
                   >
                     <ArrowUpRight className="w-6 h-6 transition-transform duration-300 group-hover:rotate-45" />
@@ -217,6 +218,7 @@ export default function Pricing() {
                   </div>
                   <Button
                     size="icon"
+                    aria-label="Learn more about Employer of Record"
                     className="h-14 w-14 rounded-full bg-white text-foreground hover:bg-orange-primary hover:text-white border-2 border-transparent hover:border-white shadow-sm group cursor-pointer transition-all duration-300"
                   >
                     <ArrowUpRight className="w-6 h-6 transition-transform duration-300 group-hover:rotate-45" />

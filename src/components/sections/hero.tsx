@@ -181,9 +181,11 @@ export default function Hero() {
             <NativeButton
               size="lg"
               glow={false}
-              className="cursor-pointer rounded-full pl-8 pr-2 h-14 md:h-16 border border-accent w-full sm:w-auto text-base md:text-lg bg-blue-primary text-kynto-white hover:bg-blue-primary/80 hover:text-kynto-white gap-4 justify-between sm:justify-start"
+              className="cursor-pointer rounded-full pl-8 pr-2 h-14 md:h-16 border border-accent w-full sm:w-auto text-base md:text-lg bg-blue-primary text-kynto-white hover:bg-blue-primary/80 hover:text-kynto-white gap-4 justify-between sm:justify-start drop-shadow-md"
             >
-              <span className="font-medium">Start Hiring</span>
+              <span className="font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+                Start Hiring
+              </span>
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-kynto-white text-kynto-white flex items-center justify-center">
                 <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-blue-primary" />
               </div>
