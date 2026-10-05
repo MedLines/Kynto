@@ -20,10 +20,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+  hidden: { opacity: 0, transform: "translateY(20px)", filter: "blur(4px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     filter: "blur(0px)",
     transition: {
       duration: 0.8,
@@ -34,9 +34,9 @@ const itemVariants = {
 
 // Text reveal effect (slide up from masked container)
 const textRevealVariants = {
-  hidden: { y: "100%" },
+  hidden: { transform: "translateY(100%)" },
   visible: {
-    y: "0%",
+    transform: "translateY(0%)",
     transition: {
       duration: 0.5,
       ease: [0.33, 1, 0.68, 1] as any,
@@ -55,10 +55,14 @@ const starContainer = {
 };
 
 const fadeInLeft = {
-  hidden: { opacity: 0, x: -40, filter: "blur(10px)" },
+  hidden: {
+    opacity: 0,
+    transform: "translateX(-40px)",
+    filter: "blur(4px)",
+  },
   visible: {
     opacity: 1,
-    x: 0,
+    transform: "translateX(0px)",
     filter: "blur(0px)",
     transition: {
       duration: 0.8,
@@ -68,10 +72,14 @@ const fadeInLeft = {
 };
 
 const fadeInRight = {
-  hidden: { opacity: 0, x: 40, filter: "blur(10px)" },
+  hidden: {
+    opacity: 0,
+    transform: "translateX(40px)",
+    filter: "blur(4px)",
+  },
   visible: {
     opacity: 1,
-    x: 0,
+    transform: "translateX(0px)",
     filter: "blur(0px)",
     transition: {
       duration: 0.8,
@@ -83,11 +91,11 @@ const fadeInRight = {
 const starVariant = {
   hidden: {
     opacity: 0,
-    scale: 0,
+    transform: "scale(0)",
   },
   visible: {
     opacity: 1,
-    scale: 1,
+    transform: "scale(1)",
     transition: {
       type: "spring" as const,
       stiffness: 260,

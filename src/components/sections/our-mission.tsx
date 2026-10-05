@@ -9,10 +9,10 @@ import { MissionBadges } from "./mission-badges";
 const EASING = [0.22, 1, 0.36, 1] as const;
 
 const containerVariants = {
-  hidden: { opacity: 0, scale: 0.96 },
+  hidden: { opacity: 0, transform: "scale(0.96)" },
   visible: {
     opacity: 1,
-    scale: 1,
+    transform: "scale(1)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -22,10 +22,10 @@ const containerVariants = {
 };
 
 const slideRight = {
-  hidden: { opacity: 0, x: -50 },
+  hidden: { opacity: 0, transform: "translateX(-50px)" },
   visible: {
     opacity: 1,
-    x: 0,
+    transform: "translateX(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -34,10 +34,10 @@ const slideRight = {
 };
 
 const slideLeft = {
-  hidden: { opacity: 0, x: 50 },
+  hidden: { opacity: 0, transform: "translateX(50px)" },
   visible: {
     opacity: 1,
-    x: 0,
+    transform: "translateX(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -46,10 +46,10 @@ const slideLeft = {
 };
 
 const slideUp = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, transform: "translateY(50px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as any,
@@ -68,7 +68,6 @@ export default function OurMission() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        style={{ willChange: "opacity, transform" }}
         className="kynto-container border-t border-border/50"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">

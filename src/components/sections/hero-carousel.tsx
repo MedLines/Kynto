@@ -55,7 +55,7 @@ export function HeroCarousel({
                 ? "bg-gray-800"
                 : "bg-kynto-black",
               isCenter
-                ? "cursor-grab active:cursor-grabbing touch-pan-y"
+                ? "kynto-draggable touch-pan-y"
                 : "cursor-pointer",
             )}
             initial={false}
@@ -146,7 +146,7 @@ export function HeroCarousel({
             e.stopPropagation();
             onPrev();
           }}
-          className="w-8 h-8 rounded-full bg-kynto-white/10 backdrop-blur-md flex items-center justify-center text-kynto-white/70 hover:bg-kynto-white/20 hover:text-kynto-white transition-colors pointer-events-auto"
+          className="w-8 h-8 rounded-full bg-kynto-white/10 backdrop-blur-md flex items-center justify-center text-kynto-white/70 hover:bg-kynto-white/20 hover:text-kynto-white transition-colors pointer-events-auto cursor-pointer"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -155,7 +155,7 @@ export function HeroCarousel({
             e.stopPropagation();
             onNext();
           }}
-          className="w-8 h-8 rounded-full bg-kynto-white/10 backdrop-blur-md flex items-center justify-center text-kynto-white/70 hover:bg-kynto-white/20 hover:text-kynto-white transition-colors pointer-events-auto"
+          className="w-8 h-8 rounded-full bg-kynto-white/10 backdrop-blur-md flex items-center justify-center text-kynto-white/70 hover:bg-kynto-white/20 hover:text-kynto-white transition-colors pointer-events-auto cursor-pointer"
         >
           <ChevronRight className="w-4 h-4" />
         </button>

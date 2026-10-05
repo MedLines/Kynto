@@ -168,10 +168,105 @@
   body {
     @apply bg-background text-foreground;
   }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 @layer components {
   .kynto-container {
     @apply container mx-auto px-4 md:px-6;
   }
+
+  .kynto-border-beam {
+    offset-distance: 0%;
+    animation: kynto-border-beam var(--duration, 10s) linear infinite;
+  }
+}
+
+@keyframes kynto-border-beam {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes kynto-gradient-shift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+.kynto-gradient-shift {
+  animation: kynto-gradient-shift 3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kynto-border-beam,
+  .kynto-gradient-shift {
+    animation: none;
+  }
+}
+
+/* Every button: interruptible hover and press. Active wins over hover while held. */
+button:not(:disabled):not([data-static]),
+[role="button"]:not(:disabled):not([data-static]),
+[data-slot="button"]:not(:disabled):not([data-static]):not([aria-disabled="true"]) {
+  cursor: pointer;
+  transition-property: scale, background-color, color, border-color, box-shadow, opacity;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button:not(:disabled):not([data-static]):hover,
+  [role="button"]:not(:disabled):not([data-static]):hover,
+  [data-slot="button"]:not(:disabled):not([data-static]):not([aria-disabled="true"]):hover {
+    scale: 1.01;
+  }
+
+  button:not(:disabled):not([data-static]):active,
+  [role="button"]:not(:disabled):not([data-static]):active,
+  [data-slot="button"]:not(:disabled):not([data-static]):not([aria-disabled="true"]):active {
+    scale: 0.96;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  button:not(:disabled):not([data-static]):active,
+  [role="button"]:not(:disabled):not([data-static]):active,
+  [data-slot="button"]:not(:disabled):not([data-static]):not([aria-disabled="true"]):active {
+    scale: 0.96;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:not(:disabled):hover,
+  button:not(:disabled):active,
+  [role="button"]:not(:disabled):hover,
+  [role="button"]:not(:disabled):active,
+  [data-slot="button"]:hover,
+  [data-slot="button"]:active {
+    scale: none;
+  }
+}
+
+/* Drag surfaces. Buttons inside keep the pointer; press still scales them. */
+.kynto-draggable,
+.kynto-draggable * {
+  cursor: grab;
+}
+.kynto-draggable :is(button, [role="button"], [data-slot="button"]),
+.kynto-draggable :is(button, [role="button"], [data-slot="button"]) * {
+  cursor: pointer;
+}
+.kynto-draggable:active,
+.kynto-draggable:active * {
+  cursor: grabbing;
 }

@@ -98,7 +98,7 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
+          "fixed top-0 left-0 right-0 z-50 transition-[transform,background-color,border-color,box-shadow,padding] duration-300 border-b border-transparent",
           isScrolled
             ? "bg-white/90 backdrop-blur-md py-4 shadow-sm"
             : "py-6 bg-transparent",
@@ -117,7 +117,7 @@ export function Header() {
               width={89}
               height={32}
               className={cn(
-                "transition-all duration-300",
+                "transition-[filter] duration-300",
                 (isScrolled || isMobileMenuOpen) && "invert",
               )}
               priority
@@ -147,7 +147,7 @@ export function Header() {
                 <NativeButton
                   variant={isScrolled ? "default" : "secondary"}
                   className={cn(
-                    "rounded-full font-medium px-6 transition-all duration-300 h-10 shadow-none border-none",
+                    "rounded-full font-medium px-6 transition-[background-color,color,box-shadow] duration-300 h-10 shadow-none border-none",
                     isScrolled
                       ? "bg-black text-white hover:bg-zinc-800 hover:shadow-lg"
                       : "bg-white text-black hover:bg-gray-100 hover:shadow-lg",
@@ -165,7 +165,7 @@ export function Header() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden relative z-50 p-2 focus:outline-none"
+            className="md:hidden relative z-50 cursor-pointer p-2 focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -187,9 +187,9 @@ export function Header() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, transform: "translateY(-20px)" }}
+            animate={{ opacity: 1, transform: "translateY(0px)" }}
+            exit={{ opacity: 0, transform: "translateY(-20px)" }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 bg-white pt-24 px-6 md:hidden flex flex-col items-center overflow-y-auto"
           >
@@ -197,8 +197,8 @@ export function Header() {
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, transform: "translateY(20px)" }}
+                  animate={{ opacity: 1, transform: "translateY(0px)" }}
                   transition={{ delay: 0.05 + i * 0.05 }}
                   className="w-full text-center"
                 >
@@ -213,8 +213,8 @@ export function Header() {
               ))}
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, transform: "translateY(20px)" }}
+                animate={{ opacity: 1, transform: "translateY(0px)" }}
                 transition={{ delay: 0.05 + NAV_LINKS.length * 0.05 }}
                 className="w-full mt-4 flex justify-center"
               >

@@ -7,7 +7,7 @@ import {
   CursorPointer,
 } from "@/components/kibo-ui/cursor";
 import { NativeBadge } from "@/components/ui/native-badge";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion, useMotionTemplate, useMotionValue, useSpring } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -19,6 +19,7 @@ export default function Integrations() {
   const springConfig = { damping: 50, stiffness: 800 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
+  const cursorTransform = useMotionTemplate`translate3d(${cursorXSpring}px, ${cursorYSpring}px, 0)`;
 
   return (
     <section
@@ -36,8 +37,7 @@ export default function Integrations() {
           position: "fixed",
           left: 0,
           top: 0,
-          x: cursorXSpring,
-          y: cursorYSpring,
+          transform: cursorTransform,
           zIndex: 50,
           pointerEvents: "none",
         }}
@@ -60,8 +60,8 @@ export default function Integrations() {
           {/* Text Content */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-xl">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px)" }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
@@ -70,8 +70,8 @@ export default function Integrations() {
 
             <motion.h2
               className="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-5xl leading-[1.1] tracking-tight text-kynto-black"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px)" }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
             >
@@ -81,8 +81,8 @@ export default function Integrations() {
 
             <motion.p
               className="mt-6 text-lg md:text-xl text-muted-foreground/80 max-w-md font-medium"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px)" }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
             >
@@ -96,8 +96,8 @@ export default function Integrations() {
             {/* Row 1 */}
             {/* Slack */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px) scale(0.8)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
               transition={{ duration: 0.6, delay: 0.2, type: "spring" }}
               viewport={{ once: true }}
             >
@@ -114,8 +114,8 @@ export default function Integrations() {
             </motion.div>
             {/* QuickBooks */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px) scale(0.8)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
               transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
               viewport={{ once: true }}
             >
@@ -133,8 +133,8 @@ export default function Integrations() {
             {/* Row 2 */}
             {/* BambooHR */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px) scale(0.8)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
               transition={{ duration: 0.6, delay: 0.4, type: "spring" }}
               viewport={{ once: true }}
             >
@@ -152,8 +152,8 @@ export default function Integrations() {
             {/* Zapier */}
             <motion.div
               className="md:col-start-2"
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px) scale(0.8)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
               transition={{ duration: 0.6, delay: 0.5, type: "spring" }}
               viewport={{ once: true }}
             >
@@ -170,8 +170,8 @@ export default function Integrations() {
             </motion.div>
             {/* 12+ Apps */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px) scale(0.8)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
               transition={{ duration: 0.6, delay: 0.6, type: "spring" }}
               viewport={{ once: true }}
             >

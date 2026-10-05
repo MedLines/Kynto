@@ -30,12 +30,11 @@ const MouseTiltCard: React.FC<MouseTiltCardProps> = ({
   scale = 1.05,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const boundsRef = useRef<DOMRect | null>(null);
 
-  // Motion values for mouse position
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Smooth out the rotation with springs
   const rotateX = useSpring(
     useTransform(y, [-0.5, 0.5], [tiltIntensity, -tiltIntensity]),
     {
@@ -53,35 +52,19 @@ const MouseTiltCard: React.FC<MouseTiltCardProps> = ({
     },
   );
 
-  // Scale spring
   const scaleHover = useSpring(1, { stiffness: 100, damping: 20 });
 
-  // Glare motion values
-  const glareX = useSpring(useTransform(x, [-0.5, 0.5], ["0%", "100%"]), {
-    stiffness: 150,
-    damping: 20,
-  });
-  const glareY = useSpring(useTransform(y, [-0.5, 0.5], ["0%", "100%"]), {
-    stiffness: 150,
-    damping: 20,
-  });
+  // Highlight tracks the pointer directly. The card tilt stays on the springs.
+  const glareX = useTransform(x, [-0.5, 0.5], [-35, 35]);
+  const glareY = useTransform(y, [-0.5, 0.5], [-35, 35]);
   const glareOpacity = useSpring(0, { stiffness: 150, damping: 20 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    const rect = boundsRef.current;
+    if (!rect) return;
 
-    const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-
-    x.set(xPct);
-    y.set(yPct);
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
 
     if (glareEffect) {
       glareOpacity.set(1);
@@ -89,6 +72,7 @@ const MouseTiltCard: React.FC<MouseTiltCardProps> = ({
   };
 
   const handleMouseEnter = () => {
+    boundsRef.current = cardRef.current?.getBoundingClientRect() ?? null;
     scaleHover.set(scale);
   };
 
@@ -100,7 +84,7 @@ const MouseTiltCard: React.FC<MouseTiltCardProps> = ({
   };
 
   const transform = useMotionTemplate`perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scaleHover})`;
-  const background = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,${glareIntensity}) 0%, transparent 50%)`;
+  const glareTransform = useMotionTemplate`translate3d(${glareX}%, ${glareY}%, 0)`;
 
   return (
     <motion.div
@@ -115,15 +99,17 @@ const MouseTiltCard: React.FC<MouseTiltCardProps> = ({
     >
       {children}
 
-      {/* Glare Effect */}
       {glareEffect && (
-        <motion.div
-          className="absolute inset-0 pointer-events-none rounded-[inherit] z-9999"
-          style={{
-            background,
-            opacity: glareOpacity,
-          }}
-        />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[inherit] z-9999">
+          <motion.div
+            className="absolute -inset-[45%]"
+            style={{
+              background: `radial-gradient(circle at center, rgba(255,255,255,${glareIntensity}) 0%, transparent 42%)`,
+              opacity: glareOpacity,
+              transform: glareTransform,
+            }}
+          />
+        </div>
       )}
     </motion.div>
   );

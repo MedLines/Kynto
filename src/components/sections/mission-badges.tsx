@@ -31,10 +31,10 @@ export function MissionBadges() {
         <motion.div
           key={index}
           variants={{
-            hidden: { opacity: 0, y: 30 },
+            hidden: { opacity: 0, transform: "translateY(30px)" },
             visible: {
               opacity: 1,
-              y: 0,
+              transform: "translateY(0px)",
               transition: {
                 duration: 0.8,
                 ease: [0.22, 1, 0.36, 1],
@@ -50,21 +50,12 @@ export function MissionBadges() {
              Using direct styles for the gradient to ensure colors map correctly 
              regardless of Tailwind utility existence.
           */}
-          <motion.div
-            className="absolute -inset-[1px] rounded-full opacity-100 transition duration-500 group-hover:opacity-100"
+          <div
+            className="kynto-gradient-shift absolute -inset-[1px] rounded-full"
             style={{
               background:
                 "linear-gradient(90deg, var(--kynto-blue-primary), var(--kynto-green-secondary), var(--kynto-blue-primary))",
               backgroundSize: "200% 100%",
-              willChange: "background-position",
-            }}
-            animate={{
-              backgroundPosition: ["0% 50%", "200% 50%"],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear",
             }}
           />
 

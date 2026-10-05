@@ -18,10 +18,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, transform: "translateY(30px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: {
       duration: 0.7,
       ease: EASING as [number, number, number, number],
@@ -30,10 +30,10 @@ const itemVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, transform: "translateY(40px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: {
       duration: 0.8,
       ease: EASING as [number, number, number, number],
@@ -135,9 +135,9 @@ export default function Pricing() {
                     <AnimatePresence mode="wait">
                       <motion.span
                         key={freelancePrice}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
+                        initial={{ opacity: 0, transform: "translateY(10px)" }}
+                        animate={{ opacity: 1, transform: "translateY(0px)" }}
+                        exit={{ opacity: 0, transform: "translateY(-10px)" }}
                         transition={{ duration: 0.2 }}
                         className="text-3xl font-semibold inline-block"
                       >
@@ -196,9 +196,9 @@ export default function Pricing() {
                     <AnimatePresence mode="wait">
                       <motion.span
                         key={eorPrice}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
+                        initial={{ opacity: 0, transform: "translateY(10px)" }}
+                        animate={{ opacity: 1, transform: "translateY(0px)" }}
+                        exit={{ opacity: 0, transform: "translateY(-10px)" }}
                         transition={{ duration: 0.2 }}
                         className="text-3xl font-semibold inline-block"
                       >

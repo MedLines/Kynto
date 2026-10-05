@@ -27,10 +27,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, transform: "translateY(30px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: {
       duration: 0.7,
       ease: EASING as [number, number, number, number],
@@ -205,7 +205,7 @@ export default function Resources() {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-xl md:text-2xl font-medium underline decoration-1 underline-offset-4 decoration-transparent group-hover:decoration-foreground transition-all duration-300 line-clamp-2">
+                      <h3 className="text-xl md:text-2xl font-medium underline decoration-1 underline-offset-4 decoration-transparent group-hover:decoration-foreground transition-[text-decoration-color] duration-300 line-clamp-2">
                         {res.title}
                       </h3>
                     </div>
@@ -255,7 +255,7 @@ export default function Resources() {
               <button
                 key={i}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-300 cursor-pointer",
+                  "w-3 h-3 rounded-full transition-[transform,background-color] duration-300 cursor-pointer",
                   i === current - 1
                     ? "bg-black scale-125"
                     : "bg-gray-300 hover:bg-gray-400",

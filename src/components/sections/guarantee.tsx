@@ -4,10 +4,9 @@ import Image from "next/image";
 
 import { NativeBadge } from "@/components/ui/native-badge";
 import { NativeButton } from "@/components/ui/native-button";
-import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const STORIES = [
   {
@@ -42,54 +41,91 @@ const STORIES = [
   },
 ];
 
+const STORY_DURATION = 5000;
+
 export default function Guarantee() {
-  const [storyState, setStoryState] = useState({
-    activeStory: 0,
-    progress: 0,
-  });
+  const sectionRef = useRef<HTMLElement>(null);
+  const barsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const storyRef = useRef(0);
+  const progressRef = useRef(0);
+  const [activeStory, setActiveStory] = useState(0);
 
-  const { activeStory, progress } = storyState;
-
-  useEffect(() => {
-    const duration = 5000; // 5 seconds per story
-    const intervalTime = 50;
-    const step = 100 / (duration / intervalTime);
-
-    const timer = setInterval(() => {
-      setStoryState((prev) => {
-        if (prev.progress >= 100) {
-          return {
-            activeStory: (prev.activeStory + 1) % STORIES.length,
-            progress: 0,
-          };
-        }
-        return {
-          ...prev,
-          progress: prev.progress + step,
-        };
-      });
-    }, intervalTime);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleStoryClick = (index: number) => {
-    setStoryState({
-      activeStory: index,
-      progress: 0,
+  const paintBars = (story: number, progress: number) => {
+    barsRef.current.forEach((bar, index) => {
+      if (!bar) return;
+      const scale = index < story ? 1 : index === story ? progress : 0;
+      bar.style.transform = `scaleX(${scale})`;
     });
   };
 
+  useLayoutEffect(() => {
+    let frame = 0;
+    let last = performance.now();
+    let running = false;
+
+    const tick = (now: number) => {
+      if (!running) return;
+      const delta = now - last;
+      last = now;
+      progressRef.current += Math.min(delta, 64) / STORY_DURATION;
+
+      if (progressRef.current >= 1) {
+        progressRef.current = 0;
+        storyRef.current = (storyRef.current + 1) % STORIES.length;
+        setActiveStory(storyRef.current);
+      }
+
+      paintBars(storyRef.current, progressRef.current);
+      frame = requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      last = performance.now();
+      frame = requestAnimationFrame(tick);
+    };
+
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(frame);
+    };
+
+    const node = sectionRef.current;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) start();
+      else stop();
+    });
+
+    if (node) observer.observe(node);
+    paintBars(storyRef.current, progressRef.current);
+
+    return () => {
+      stop();
+      observer.disconnect();
+    };
+  }, []);
+
+  const handleStoryClick = (index: number) => {
+    storyRef.current = index;
+    progressRef.current = 0;
+    setActiveStory(index);
+    paintBars(index, 0);
+  };
+
   return (
-    <section className="relative z-20 w-full py-16 md:py-24 bg-white font-poppins overflow-hidden rounded-b-[2.5rem]">
+    <section
+      ref={sectionRef}
+      className="relative z-20 w-full py-16 md:py-24 bg-white font-poppins overflow-hidden rounded-b-[2.5rem]"
+    >
       <div className="kynto-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
           {/* Left Content */}
           <div className="flex flex-col items-start h-full justify-between py-6 w-full">
             <div className="flex flex-col gap-8 w-full items-center lg:items-start">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, transform: "translateY(20px)" }}
+                whileInView={{ opacity: 1, transform: "translateY(0px)" }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
               >
@@ -101,8 +137,8 @@ export default function Guarantee() {
               <div className="flex flex-col gap-10 w-full items-center lg:items-start">
                 <motion.h2
                   className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-normal tracking-tight text-kynto-black leading-[1.1] text-center lg:text-left w-full"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, transform: "translateY(20px)" }}
+                  whileInView={{ opacity: 1, transform: "translateY(0px)" }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                   viewport={{ once: true }}
                 >
@@ -111,8 +147,8 @@ export default function Guarantee() {
                 </motion.h2>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, transform: "translateY(20px)" }}
+                  whileInView={{ opacity: 1, transform: "translateY(0px)" }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   viewport={{ once: true }}
                   className="w-full sm:w-auto flex justify-center mb-12 sm:mb-0"
@@ -134,8 +170,8 @@ export default function Guarantee() {
             {/* Monitoring Icon/Text */}
             <motion.div
               className="flex items-start gap-3 text-sm text-muted-foreground"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px)" }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
             >
@@ -163,8 +199,8 @@ export default function Guarantee() {
           {/* Right Content - Interactive Story Card */}
           <motion.div
             className="relative mx-auto w-full max-w-md lg:max-w-none"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, transform: "translateX(20px)" }}
+            whileInView={{ opacity: 1, transform: "translateX(0px)" }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
@@ -178,19 +214,14 @@ export default function Guarantee() {
                     <button
                       key={index}
                       onClick={() => handleStoryClick(index)}
-                      className="group relative h-1.5 flex-1 overflow-hidden rounded-full bg-black/10 transition-all hover:bg-green-border focus:outline-none cursor-pointer"
+                      className="group relative h-1.5 flex-1 overflow-hidden rounded-full bg-black/10 transition-colors hover:bg-green-border focus:outline-none cursor-pointer"
                       aria-label={`Go to story ${index + 1}`}
                     >
                       <div
-                        className={cn(
-                          "absolute inset-0 bg-white transition-all duration-100 ease-linear",
-                          index < activeStory ? "w-full" : "w-0",
-                        )}
-                        style={
-                          index === activeStory
-                            ? { width: `${progress}%` }
-                            : undefined
-                        }
+                        ref={(node) => {
+                          barsRef.current[index] = node;
+                        }}
+                        className="absolute inset-y-0 left-0 w-full origin-left bg-white"
                       />
                     </button>
                   ))}
@@ -199,9 +230,9 @@ export default function Guarantee() {
                 <div className="flex flex-col gap-3 mt-auto relative z-20">
                   <motion.div
                     key={activeStory}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
+                    initial={{ opacity: 0, transform: "translateY(10px)" }}
+                    animate={{ opacity: 1, transform: "translateY(0px)" }}
+                    exit={{ opacity: 0, transform: "translateY(-10px)" }}
                     transition={{ duration: 0.4 }}
                   >
                     <h3 className="text-5xl sm:text-6xl lg:text-8xl font-normal tracking-tight text-kynto-black mb-1">

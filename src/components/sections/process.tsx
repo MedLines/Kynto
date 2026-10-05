@@ -16,10 +16,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, transform: "translateY(30px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: {
       duration: 0.7,
       ease: EASING as [number, number, number, number],
@@ -92,10 +92,10 @@ export default function Process() {
               <motion.div
                 key={index}
                 variants={{
-                  hidden: { opacity: 0, y: 30 },
+                  hidden: { opacity: 0, transform: "translateY(30px)" },
                   visible: {
                     opacity: 1,
-                    y: 0,
+                    transform: "translateY(0px)",
                     transition: {
                       duration: 0.6,
                       delay: index * 0.1,
@@ -111,7 +111,7 @@ export default function Process() {
               >
                 <div
                   className={cn(
-                    "w-full transition-all duration-500 relative",
+                    "w-full relative",
                     index === 0 && "xl:mt-0",
                     index === 1 && "xl:mt-[160px]",
                     index === 2 && "xl:mt-[320px]",
@@ -142,12 +142,7 @@ export default function Process() {
 
 function ProcessCard({ step }: { step: (typeof processSteps)[0] }) {
   return (
-    <motion.div
-      initial="rest"
-      whileHover="hover"
-      animate="rest"
-      className="group relative w-full rounded-[20px] bg-secondary overflow-hidden transition-all duration-300"
-    >
+    <div className="group relative w-full rounded-[20px] bg-secondary overflow-hidden">
       {/* Background Transition - XL Desktop Only */}
       <div className="hidden xl:block">
         <div className="absolute inset-0 bg-secondary transition-colors duration-300 group-hover:bg-card-black" />
@@ -179,28 +174,14 @@ function ProcessCard({ step }: { step: (typeof processSteps)[0] }) {
         </div>
 
         {/* Desktop Description (Animated, White Text on Hover, XL screens only) */}
-        <div className="hidden xl:block">
-          <motion.div
-            variants={{
-              rest: {
-                height: 0,
-                opacity: 0,
-                marginTop: 0,
-              },
-              hover: {
-                height: "auto",
-                opacity: 1,
-                marginTop: 12,
-              },
-            }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          >
-            <p className="text-white/80 text-sm leading-relaxed">
+        <div className="hidden xl:grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out mt-0 group-hover:mt-3">
+          <div className="overflow-hidden">
+            <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out">
               {step.description}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

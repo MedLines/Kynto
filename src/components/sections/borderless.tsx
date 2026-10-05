@@ -8,6 +8,22 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+const profileSwap = {
+  hidden: { opacity: 0, transform: "translateY(20px)", filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    transform: "translateY(0px)",
+    filter: "blur(0px)",
+    transition: { duration: 0.5, ease: "easeOut" as const },
+  },
+  exit: {
+    opacity: 0,
+    transform: "translateY(-20px)",
+    filter: "blur(4px)",
+    transition: { duration: 0.3 },
+  },
+};
+
 const profiles = [
   {
     name: "Sofia Rodriguez",
@@ -67,10 +83,10 @@ export default function Borderless() {
       >
         <motion.div
           variants={{
-            hidden: { opacity: 0, y: 20 },
+            hidden: { opacity: 0, transform: "translateY(20px)" },
             visible: {
               opacity: 1,
-              y: 0,
+              transform: "translateY(0px)",
               transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
             },
           }}
@@ -85,10 +101,10 @@ export default function Borderless() {
 
         <motion.h2
           variants={{
-            hidden: { opacity: 0, y: 30 },
+            hidden: { opacity: 0, transform: "translateY(30px)" },
             visible: {
               opacity: 1,
-              y: 0,
+              transform: "translateY(0px)",
               transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
             },
           }}
@@ -101,11 +117,10 @@ export default function Borderless() {
         {/* Profile Card  */}
         <motion.div
           variants={{
-            hidden: { opacity: 0, y: 40, scale: 0.95 },
+            hidden: { opacity: 0, transform: "translateY(40px) scale(0.95)" },
             visible: {
               opacity: 1,
-              y: 0,
-              scale: 1,
+              transform: "translateY(0px) scale(1)",
               transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
             },
           }}
@@ -116,7 +131,7 @@ export default function Borderless() {
             glareIntensity={0.2}
             scale={1.02}
           >
-            <div className="relative w-[320px] min-h-[550px]  bg-card-black/90 border border-orange-primary/10 rounded-4xl overflow-hidden flex flex-col items-center shadow-2xl group transition-all duration-500 hover:border-orange-primary/30">
+            <div className="relative w-[320px] min-h-[550px]  bg-card-black/90 border border-orange-primary/10 rounded-4xl overflow-hidden flex flex-col items-center shadow-2xl group transition-colors duration-500 hover:border-orange-primary/30">
               <BorderBeam
                 lightColor="var(--color-orange-primary)"
                 lightWidth={900}
@@ -162,21 +177,7 @@ export default function Borderless() {
                 >
                   {/* Avatar - Centered on the Arc Line */}
                   <motion.div
-                    variants={{
-                      hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        filter: "blur(0px)",
-                        transition: { duration: 0.5, ease: "easeOut" },
-                      },
-                      exit: {
-                        opacity: 0,
-                        y: -20,
-                        filter: "blur(10px)",
-                        transition: { duration: 0.3 },
-                      },
-                    }}
+                    variants={profileSwap}
                     className="relative mt-[95px] z-10"
                   >
                     <div className="w-[180px] h-[180px] rounded-full bg-card-black overflow-hidden relative border-4 border-white/10 shadow-xl">
@@ -192,61 +193,19 @@ export default function Borderless() {
                   {/* Text Info */}
                   <div className="relative z-10 mt-6 flex flex-col items-center text-center">
                     <motion.p
-                      variants={{
-                        hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                          filter: "blur(0px)",
-                          transition: { duration: 0.5, ease: "easeOut" },
-                        },
-                        exit: {
-                          opacity: 0,
-                          y: -20,
-                          filter: "blur(10px)",
-                          transition: { duration: 0.3 },
-                        },
-                      }}
+                      variants={profileSwap}
                       className="text-white text-sm font-medium mb-4"
                     >
                       {profiles[currentIndex].location}
                     </motion.p>
                     <motion.h3
-                      variants={{
-                        hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                          filter: "blur(0px)",
-                          transition: { duration: 0.5, ease: "easeOut" },
-                        },
-                        exit: {
-                          opacity: 0,
-                          y: -20,
-                          filter: "blur(10px)",
-                          transition: { duration: 0.3 },
-                        },
-                      }}
+                      variants={profileSwap}
                       className="text-white text-[28px] font-medium leading-tight tracking-tight"
                     >
                       {profiles[currentIndex].name}
                     </motion.h3>
                     <motion.p
-                      variants={{
-                        hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                          filter: "blur(0px)",
-                          transition: { duration: 0.5, ease: "easeOut" },
-                        },
-                        exit: {
-                          opacity: 0,
-                          y: -20,
-                          filter: "blur(10px)",
-                          transition: { duration: 0.3 },
-                        },
-                      }}
+                      variants={profileSwap}
                       className="text-white/80 text-[22px] font-normal leading-tight"
                     >
                       {profiles[currentIndex].role}
@@ -255,21 +214,7 @@ export default function Borderless() {
 
                   {/* Action Area */}
                   <motion.div
-                    variants={{
-                      hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        filter: "blur(0px)",
-                        transition: { duration: 0.5, ease: "easeOut" },
-                      },
-                      exit: {
-                        opacity: 0,
-                        y: -20,
-                        filter: "blur(10px)",
-                        transition: { duration: 0.3 },
-                      },
-                    }}
+                    variants={profileSwap}
                     className="relative z-10 mt-10 mb-10 flex items-center justify-center gap-6 w-full px-6"
                   >
                     <div className="h-px w-12 bg-orange-primary rounded-full" />
@@ -301,21 +246,23 @@ export default function Borderless() {
 
       {/* Orange Bottom Gradient Glow */}
       <div
-        className="absolute bottom-0 left-0 w-full h-[600px] z-10 pointer-events-none opacity-80"
+        className="absolute bottom-[150px] left-1/2 z-10 h-[300px] w-1/2 pointer-events-none opacity-80"
         style={{
           background:
             "radial-gradient(50% 50% at 50% 100%, #FF5500 0%, rgba(255, 85, 0, 0.4) 40%, rgba(255, 85, 0, 0) 100%)",
-          filter: "blur(40px)",
+          filter: "blur(20px)",
+          transform: "translateX(-50%) scale(2)",
         }}
       />
 
       {/* Intense base glow for extra pop */}
       <div
-        className="absolute bottom-[-100px] left-1/2 -translate-x-1/2 w-[80%] h-[300px] z-10 pointer-events-none mix-blend-screen opacity-100"
+        className="absolute bottom-[-25px] left-1/2 z-10 h-[150px] w-[40%] pointer-events-none mix-blend-screen opacity-100"
         style={{
           background:
             "radial-gradient(50% 50% at 50% 50%, #FF7733 0%, rgba(255, 119, 51, 0) 100%)",
-          filter: "blur(80px)",
+          filter: "blur(40px)",
+          transform: "translateX(-50%) scale(2)",
         }}
       />
     </section>

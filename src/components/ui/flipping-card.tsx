@@ -25,16 +25,16 @@ export function FlippingCard({
 
   const variants = {
     hidden: {
-      rotateX: isVertical ? 180 : 0,
-      rotateY: !isVertical ? -180 : 0,
+      transform: isVertical
+        ? "rotateX(180deg) rotateY(0deg)"
+        : "rotateX(0deg) rotateY(-180deg)",
     },
     visible: {
-      rotateX: 0,
-      rotateY: 0,
+      transform: "rotateX(0deg) rotateY(0deg)",
       transition: {
         duration: 0.8,
         delay: delay,
-        ease: [0.22, 1, 0.36, 1] as any, // Custom cubic-bezier
+        ease: [0.22, 1, 0.36, 1] as any,
       },
     },
   };

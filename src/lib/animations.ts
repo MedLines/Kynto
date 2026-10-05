@@ -20,15 +20,16 @@ export const quickTransition: Transition = {
   ease: "easeOut",
 };
 
-// Fade in from bottom (for text, cards)
+// Fade in from bottom (for text, cards).
+// Full transform strings stay on the compositor; x/y/scale shorthands do not.
 export const fadeInUp: Variants = {
   hidden: {
     opacity: 0,
-    y: 20,
+    transform: "translateY(20px)",
   },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: defaultTransition,
   },
 };
@@ -37,11 +38,11 @@ export const fadeInUp: Variants = {
 export const fadeInDown: Variants = {
   hidden: {
     opacity: 0,
-    y: -20,
+    transform: "translateY(-20px)",
   },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: defaultTransition,
   },
 };
@@ -61,11 +62,11 @@ export const fadeIn: Variants = {
 export const scaleIn: Variants = {
   hidden: {
     opacity: 0,
-    scale: 0.95,
+    transform: "scale(0.95)",
   },
   visible: {
     opacity: 1,
-    scale: 1,
+    transform: "scale(1)",
     transition: defaultTransition,
   },
 };
@@ -98,11 +99,11 @@ export const fastStaggerContainer: Variants = {
 export const popIn: Variants = {
   hidden: {
     opacity: 0,
-    scale: 0.8,
+    transform: "scale(0.8)",
   },
   visible: {
     opacity: 1,
-    scale: 1,
+    transform: "scale(1)",
     transition: {
       type: "spring",
       stiffness: 300,
@@ -115,11 +116,11 @@ export const popIn: Variants = {
 export const slideInLeft: Variants = {
   hidden: {
     opacity: 0,
-    x: -30,
+    transform: "translateX(-30px)",
   },
   visible: {
     opacity: 1,
-    x: 0,
+    transform: "translateX(0px)",
     transition: defaultTransition,
   },
 };
@@ -128,11 +129,11 @@ export const slideInLeft: Variants = {
 export const slideInRight: Variants = {
   hidden: {
     opacity: 0,
-    x: 30,
+    transform: "translateX(30px)",
   },
   visible: {
     opacity: 1,
-    x: 0,
+    transform: "translateX(0px)",
     transition: defaultTransition,
   },
 };

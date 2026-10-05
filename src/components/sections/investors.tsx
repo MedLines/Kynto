@@ -23,10 +23,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, transform: "translateY(30px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: {
       duration: 0.7,
       ease: EASING as [number, number, number, number],
@@ -120,10 +120,10 @@ export default function Investors() {
 
           <motion.div
             variants={{
-              hidden: { opacity: 0, scale: 0.98 },
+              hidden: { opacity: 0, transform: "scale(0.98)" },
               visible: {
                 opacity: 1,
-                scale: 1,
+                transform: "scale(1)",
                 transition: {
                   duration: 0.8,
                   ease: EASING as [number, number, number, number],

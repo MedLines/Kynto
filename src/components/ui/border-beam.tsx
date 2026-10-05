@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
 import { CSSProperties, useEffect, useRef } from "react";
 
 interface BorderBeamProps {
@@ -46,7 +45,7 @@ export function BorderBeam({
     <div
       style={
         {
-          "--duration": duration,
+          "--duration": `${duration}s`,
           "--border-width": `${borderWidth}px`,
         } as CSSProperties
       }
@@ -61,8 +60,8 @@ export function BorderBeam({
       )}
       {...props}
     >
-      <motion.div
-        className="absolute inset-0 aspect-square bg-[radial-gradient(ellipse_at_center,var(--light-color),transparent,transparent)]"
+      <div
+        className="kynto-border-beam absolute inset-0 aspect-square bg-[radial-gradient(ellipse_at_center,var(--light-color),transparent,transparent)]"
         style={
           {
             "--light-color": lightColor,
@@ -71,14 +70,6 @@ export function BorderBeam({
             offsetPath: "var(--path)",
           } as CSSProperties
         }
-        animate={{
-          offsetDistance: ["0%", "100%"],
-        }}
-        transition={{
-          duration: duration,
-          repeat: Infinity,
-          ease: "linear",
-        }}
       />
     </div>
   );

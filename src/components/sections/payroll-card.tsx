@@ -19,7 +19,7 @@ export function PayrollCard({ constraintsRef }: PayrollCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="absolute bottom-50 left-20 w-[400px] h-[220px] rounded-[32px] bg-[#1a1a1a]/95 border border-white/20 p-6 flex flex-col justify-between shadow-2xl z-50 cursor-grab active:cursor-grabbing overflow-visible group will-change-transform"
+      className="kynto-draggable absolute bottom-50 left-20 w-[400px] h-[220px] rounded-[32px] bg-[#1a1a1a]/95 border border-white/20 p-6 flex flex-col justify-between shadow-2xl z-50 overflow-visible group"
     >
       {/* Header */}
       <div className="flex items-center justify-between w-full">

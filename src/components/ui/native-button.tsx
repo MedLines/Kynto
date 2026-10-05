@@ -59,15 +59,12 @@ const NativeButton = ({
   );
 
   return (
-    <motion.div
-      whileHover={
-        !disabled && !loading && !shouldReduceMotion ? { scale: 1.01 } : {}
-      }
-      whileTap={
-        !disabled && !loading && !shouldReduceMotion ? { scale: 0.98 } : {}
-      }
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      className={cn("relative block w-fit", containerClassName)}
+    <div
+      className={cn(
+        "relative block w-fit",
+        disabled || loading ? "cursor-not-allowed" : "cursor-pointer",
+        containerClassName,
+      )}
     >
       {glow && !disabled && !loading && (
         <div className="absolute inset-0 rounded-full bg-blue-primary/20 blur-xl opacity-0 hover:opacity-100 transition-opacity duration-500" />
@@ -83,7 +80,7 @@ const NativeButton = ({
       >
         {href ? <Link href={href}>{buttonContent}</Link> : buttonContent}
       </Button>
-    </motion.div>
+    </div>
   );
 };
 

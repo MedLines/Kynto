@@ -22,21 +22,23 @@ export default function FinalCTA() {
     >
       {/* Top Blue Gradient - Centered Top */}
       <div
-        className="absolute top-0 left-0 w-full h-[800px] z-10 pointer-events-none opacity-100"
+        className="absolute top-[200px] left-1/2 z-10 h-[400px] w-1/2 pointer-events-none opacity-100"
         style={{
           background:
             "radial-gradient(50% 50% at 50% 0%, var(--color-blue-primary) 0%, rgba(0, 56, 255, 0.4) 40%, rgba(0, 0, 0, 0) 100%)",
-          filter: "blur(60px)",
+          filter: "blur(30px)",
+          transform: "translateX(-50%) scale(2)",
         }}
       />
 
       {/* Intense Top Glow */}
       <div
-        className="absolute top-[-150px] left-1/2 -translate-x-1/2 w-[60%] h-[400px] z-10 pointer-events-none mix-blend-screen opacity-100"
+        className="absolute top-[-50px] left-1/2 z-10 h-[200px] w-[30%] pointer-events-none mix-blend-screen opacity-100"
         style={{
           background:
             "radial-gradient(50% 50% at 50% 50%, var(--color-blue-primary) 0%, rgba(0, 0, 0, 0) 100%)",
-          filter: "blur(80px)",
+          filter: "blur(40px)",
+          transform: "translateX(-50%) scale(2)",
         }}
       />
 
@@ -51,10 +53,10 @@ export default function FinalCTA() {
         {/* Top Left Text */}
         <motion.div
           variants={{
-            hidden: { opacity: 0, x: -40 },
+            hidden: { opacity: 0, transform: "translateX(-40px)" },
             visible: {
               opacity: 1,
-              x: 0,
+              transform: "translateX(0px)",
               transition: {
                 duration: 0.8,
                 ease: EASING as [number, number, number, number],
@@ -71,10 +73,10 @@ export default function FinalCTA() {
         {/* Main Heading Group - Right Aligned */}
         <motion.div
           variants={{
-            hidden: { opacity: 0, x: 40 },
+            hidden: { opacity: 0, transform: "translateX(40px)" },
             visible: {
               opacity: 1,
-              x: 0,
+              transform: "translateX(0px)",
               transition: {
                 duration: 0.8,
                 ease: EASING as [number, number, number, number],
@@ -98,7 +100,7 @@ export default function FinalCTA() {
             <span className="border-b border-white group-hover:border-blue-primary pb-0.5 transition-colors duration-300">
               Get Started
             </span>
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white text-black flex items-center justify-center group-hover:bg-blue-primary group-hover:text-white transition-all duration-300 transform group-hover:rotate-45">
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white text-black flex items-center justify-center group-hover:bg-blue-primary group-hover:text-white transition-[background-color,color,transform] duration-300 transform group-hover:rotate-45">
               <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
             </div>
           </Link>
@@ -107,10 +109,10 @@ export default function FinalCTA() {
         {/* Bottom Footer Elements */}
         <motion.div
           variants={{
-            hidden: { opacity: 0, y: 30 },
+            hidden: { opacity: 0, transform: "translateY(30px)" },
             visible: {
               opacity: 1,
-              y: 0,
+              transform: "translateY(0px)",
               transition: {
                 duration: 0.7,
                 ease: EASING as [number, number, number, number],

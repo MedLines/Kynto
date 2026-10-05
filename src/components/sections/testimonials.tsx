@@ -26,10 +26,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, transform: "translateY(30px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: {
       duration: 0.7,
       ease: EASING as [number, number, number, number],
@@ -137,10 +137,10 @@ export default function Testimonials() {
 
             <motion.div
               variants={{
-                hidden: { opacity: 0, y: 20 },
+                hidden: { opacity: 0, transform: "translateY(20px)" },
                 visible: {
                   opacity: 1,
-                  y: 0,
+                  transform: "translateY(0px)",
                   transition: {
                     duration: 0.8,
                     ease: EASING as [number, number, number, number],
@@ -157,7 +157,10 @@ export default function Testimonials() {
                 }}
                 className="w-full select-none"
               >
-                <CarouselContent className="-ml-4 md:-ml-6 overflow-visible">
+                <CarouselContent
+                  viewportClassName="kynto-draggable"
+                  className="-ml-4 md:-ml-6 overflow-visible"
+                >
                   {testimonials.map((testimonial, index) => {
                     const isActive = index === current;
                     return (
@@ -251,8 +254,8 @@ export default function Testimonials() {
                   })}
                 </CarouselContent>
                 <div className="flex justify-between md:justify-end gap-4 px-8 md:px-0 md:pr-8 relative z-20 mt-4 md:mt-0">
-                  <CarouselPrevious className="static translate-y-0 translate-x-0 bg-white cursor-pointer hover:bg-gray-100 border-none w-12 h-12 rounded-full shadow-sm" />
-                  <CarouselNext className="static translate-y-0 translate-x-0 bg-white cursor-pointer hover:bg-gray-100 border-none w-12 h-12 rounded-full shadow-sm" />
+                  <CarouselPrevious className="static top-auto left-auto translate-y-0 translate-x-0 bg-white hover:bg-gray-100 border-none w-12 h-12 rounded-full shadow-sm" />
+                  <CarouselNext className="static top-auto right-auto translate-y-0 translate-x-0 bg-white hover:bg-gray-100 border-none w-12 h-12 rounded-full shadow-sm" />
                 </div>
               </Carousel>
             </motion.div>

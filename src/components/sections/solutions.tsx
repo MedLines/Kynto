@@ -137,8 +137,8 @@ export default function Solutions() {
           {/* Main Title Section */}
           <div className="md:col-start-1 md:row-start-1 flex flex-col justify-center h-full w-full">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px)" }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col items-center lg:items-start text-center lg:text-left w-full max-w-lg mx-auto lg:mx-0 h-full justify-between"
@@ -157,7 +157,7 @@ export default function Solutions() {
                 <span className="block font-medium mt-2">Four Solutions</span>
               </h2>
 
-              <NativeButton className="bg-white text-black hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 rounded-full h-16 pl-8 pr-2 flex items-center gap-6 font-poppins">
+              <NativeButton className="bg-white text-black hover:bg-zinc-200 rounded-full h-16 pl-8 pr-2 flex items-center gap-6 font-poppins">
                 <span className="text-lg font-medium">Explore Features</span>
                 <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white">
                   <ArrowRight className="w-5 h-5" />
@@ -211,8 +211,8 @@ export default function Solutions() {
           {/* Global Support Card */}
           <div className="md:col-start-3 md:row-start-1 flex items-center justify-center w-full h-full">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, transform: "translateY(20px)" }}
+              whileInView={{ opacity: 1, transform: "translateY(0px)" }}
               viewport={{ once: true }}
               transition={{
                 duration: 0.8,
